@@ -10,9 +10,8 @@ import { DataTableBody } from './data-table-body/data-table-body';
 import {
 	Table,
 	TableContainer,
-	InlineNotification,
-	NotificationActionButton
-} from 'carbon-components-react';
+	ActionableNotification
+} from '@carbon/react';
 import { css } from 'emotion';
 import { warningNotificationProps } from '../../../utils/file-tools';
 import { ChartActionType, ChartsContext } from '../../../context/charts-context';
@@ -132,26 +131,30 @@ export const DataTable = ({ chart }: any) => {
 		<section aria-label={`Data table for '${chart.title}'`} tabIndex={0}>
 			{
 				notificationState.visible
-					? <InlineNotification
+					? <ActionableNotification
 						{ ...notificationState.notificationProps }
 						onCloseButtonClick={() => setNotificationState({
 							...notificationState,
 							visible: false
 						})}
-						actions={
+						actionButtonLabel={
 							notificationState.notificationProps.kind === 'warning'
-								&& <NotificationActionButton
-									onClick={() => {
-										updateData(notificationState.backupData);
-										setNotificationState({
-											...notificationState,
-											visible: false,
-											backupData: []
-										});
-									}}>
-									Revert change
-								</NotificationActionButton>
-						} />
+								? 'Revert change'
+								: undefined
+						}
+						onActionButtonClick={
+							notificationState.notificationProps.kind === 'warning'
+								? () => {
+									updateData(notificationState.backupData);
+									setNotificationState({
+										...notificationState,
+										visible: false,
+										backupData: []
+									});
+								}
+								: undefined
+						}
+						inline />
 					: null
 			}
 			<TableContainer

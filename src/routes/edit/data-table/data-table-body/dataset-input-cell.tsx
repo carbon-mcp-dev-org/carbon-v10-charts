@@ -5,7 +5,7 @@ import {
 	TextInput,
 	OverflowMenu,
 	OverflowMenuItem
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import {
 	updateGroup,
