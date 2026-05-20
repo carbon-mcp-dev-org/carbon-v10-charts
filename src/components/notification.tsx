@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { InlineNotification, NotificationActionButton } from 'carbon-components-react';
+import { ActionableNotification } from '@carbon/react';
 import {
 	NotificationContext,
 	NotificationActionType,
@@ -23,13 +23,13 @@ export const Notification = () => {
 	return (
 		<div className={notificationAreaStyle} role="alert">
 			{state.notifications.map((notification: NotificationData, index: number) => (
-				<InlineNotification
+				<ActionableNotification
 					lowContrast
+					inline
 					aria-live="assertive"
 					kind={notification.kind}
 					title={notification.title}
 					subtitle={notification.message}
-					caption={null}
 					key={notification.id}
 					onCloseButtonClick={() => {
 						if (notification.action) {
@@ -41,18 +41,14 @@ export const Notification = () => {
 						});
 					}}
 					style={notificationStyle}
-					actions={notification.action
-						? <NotificationActionButton
-							onClick={() => {
-								notification.action.actionFunction();
-								dispatch({
-									type: NotificationActionType.REMOVE_NOTIFICATION,
-									data: notification
-								});
-							}}>
-							{notification.action.actionText}
-						</NotificationActionButton>
-						: undefined}
+					actionButtonLabel={notification.action?.actionText}
+					onActionButtonClick={notification.action ? () => {
+						notification.action.actionFunction();
+						dispatch({
+							type: NotificationActionType.REMOVE_NOTIFICATION,
+							data: notification
+						});
+					} : undefined}
 				/>
 			))}
 		</div>
