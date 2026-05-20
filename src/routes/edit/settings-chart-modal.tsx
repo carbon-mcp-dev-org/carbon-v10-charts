@@ -4,7 +4,7 @@ import {
 	TextInput,
 	Checkbox,
 	TooltipDefinition
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import { ChartActionType, ChartsContext } from '../../context/charts-context';
 import './chart-modal.scss';
