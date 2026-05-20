@@ -12,10 +12,13 @@ import {
 	CodeSnippet,
 	Modal,
 	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
 	Tabs
-} from 'carbon-components-react';
-import { css } from 'emotion';
+} from '@carbon/react';
 import { ModalContext, ModalActionType } from '../../../../context/modal-context';
+import { css } from 'emotion';
 
 const codeSnippetWrapper = css`
     margin-top: 20px;
@@ -33,7 +36,7 @@ const titleWrapper = css`
 `;
 
 const codeSnippet = css`
-    .bx--copy-btn {
+    button {
         background: white;
     }
 `;
@@ -44,6 +47,37 @@ interface ExportCodeProps {
     setDisplayedModal: (displayedModal: ShareOptionsModals | null) => void
 }
 
+const renderCodeSection = (title: string, code: Record<string, any>) => (
+	<>
+		<div className={titleWrapper}>
+			<h3>{title}</h3>
+			<a
+				href={`https://codesandbox.io/api/v1/sandboxes/define?parameters=${createChartSandbox(code)}`}
+				target='_blank'
+				rel='noopener noreferrer'>
+				Edit on CodeSandbox
+			</a>
+		</div>
+		{
+			Object.keys(code).map((fileName: string) => (
+				<div className={codeSnippetWrapper} key={fileName}>
+					<p>{fileName}</p>
+					<CodeSnippet
+						type='multi'
+						className={codeSnippet}
+						copyButtonDescription={`Copy ${fileName} to clipboard`}>
+						{
+							fileName !== 'package.json'
+								? code[fileName]
+								: JSON.stringify(code[fileName], null, '\t')
+						}
+					</CodeSnippet>
+				</div>
+			))
+		}
+	</>
+);
+
 export const ExportCode = ({
 	chart,
 	displayedModal,
@@ -51,158 +85,42 @@ export const ExportCode = ({
 }: ExportCodeProps) => {
 	const [modalState, dispatchModal] = useContext(ModalContext);
 
-	const vanillaCode: any = createVanillaChartApp(chart);
-	const reactCode: any = createReactChartApp(chart);
-	const angularCode: any = createAngularChartApp(chart);
-	const vueCode: any = createVueChartApp(chart);
-
-	const generateSandboxUrl = (parameters: any) => (
-		`https://codesandbox.io/api/v1/sandboxes/define?parameters=${parameters}`
-	);
+	const vanillaCode: Record<string, any> = createVanillaChartApp(chart);
+	const reactCode: Record<string, any> = createReactChartApp(chart);
+	const angularCode: Record<string, any> = createAngularChartApp(chart);
+	const vueCode: Record<string, any> = createVueChartApp(chart);
 
 	return (
 		<Modal
-			hasForm
 			open={modalState.ShowModal && displayedModal === ShareOptionsModals.CODE_EXPORTS}
 			onRequestClose={() => dispatchModal({ type: ModalActionType.closeModal })}
 			primaryButtonText='Done'
 			secondaryButtonText='Back to export options'
 			onRequestSubmit={() => dispatchModal({ type: ModalActionType.closeModal })}
 			onSecondarySubmit={() => { setDisplayedModal(ShareOptionsModals.SHARE_OPTIONS); }}
+			size='lg'
 			modalHeading={`Export "${chart.title}" code`}>
 			<Tabs>
-				<Tab
-					id='vanilla'
-					label='Vanilla JS'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Vanilla JS Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(vanillaCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(vanillaCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? vanillaCode[fileName]
-											: JSON.stringify(vanillaCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='Angular'
-					label='Angular'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Angular Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(angularCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(angularCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? angularCode[fileName]
-											: JSON.stringify(angularCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='react'
-					label='React'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>React Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(reactCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(reactCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? reactCode[fileName]
-											: JSON.stringify(reactCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='vue'
-					label='Vue'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Vue Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(vueCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(vueCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? vueCode[fileName]
-											: JSON.stringify(vueCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
+				<TabList aria-label='Framework code export options'>
+					<Tab>Vanilla JS</Tab>
+					<Tab>Angular</Tab>
+					<Tab>React</Tab>
+					<Tab>Vue</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						{renderCodeSection('Vanilla JS Code', vanillaCode)}
+					</TabPanel>
+					<TabPanel>
+						{renderCodeSection('Angular Code', angularCode)}
+					</TabPanel>
+					<TabPanel>
+						{renderCodeSection('React Code', reactCode)}
+					</TabPanel>
+					<TabPanel>
+						{renderCodeSection('Vue Code', vueCode)}
+					</TabPanel>
+				</TabPanels>
 			</Tabs>
 		</Modal>
 	);

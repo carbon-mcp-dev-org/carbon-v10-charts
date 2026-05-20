@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 import { Image32, Code32 } from '@carbon/icons-react';
 
 import { css } from 'emotion';
@@ -14,9 +14,10 @@ import { ExportImageModal } from './exports/export-image-modal';
 const exportOptionTileWrapper = css`
 	width: 50%;
 	height: 200px;
-	.bx--tile {
+	.cds--tile {
 		height: 100%;
 		width: 100%;
+		position: relative;
 		p {
 			position: absolute;
 			bottom: 15px;
@@ -51,7 +52,6 @@ export const ShareOptionsModal = ({ chart }: any) => {
 	const [displayedModal, setDisplayedModal]
 		= useState<ShareOptionsModals | null>(ShareOptionsModals.SHARE_OPTIONS);
 
-	// This contains all the states that control the share options modal.
 	const [shareOptionsState, setShareOptionsState] = useState<ShareOptionsModalState>({
 		selectedExportOption: null
 	});
@@ -69,12 +69,11 @@ export const ShareOptionsModal = ({ chart }: any) => {
 			case ShareOptionsModals.SHARE_OPTIONS:
 				return (
 					<Modal
-						hasForm
-						onRequestSubmit={() => handleExportSelection()}
 						open={modalState.ShowModal}
+						onRequestSubmit={handleExportSelection}
 						onRequestClose={() => dispatchModal({ type: ModalActionType.closeModal })}
 						primaryButtonText='Done'
-						primaryButtonDisabled={ shareOptionsState.selectedExportOption === null }
+						primaryButtonDisabled={shareOptionsState.selectedExportOption === null}
 						secondaryButtonText='Cancel'
 						modalHeading={`Share '${chart.title}'`}>
 						<div className={exportOptionsWrapper}>
@@ -115,7 +114,7 @@ export const ShareOptionsModal = ({ chart }: any) => {
 				return <ExportImageModal
 					chart={chart}
 					displayedModal={displayedModal}
-					setDisplayedModal={setDisplayedModal}/>;
+					setDisplayedModal={setDisplayedModal} />;
 		}
 	};
 

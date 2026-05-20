@@ -1,19 +1,21 @@
 import React, {
-	useState,
+	useCallback,
+	useContext,
 	useEffect,
+	useMemo,
 	useRef,
-	useContext
+	useState
 } from 'react';
 import {
-	Modal,
-	TextInput,
+	Checkbox,
 	Form,
+	InlineLoading,
+	Modal,
+	NumberInput,
 	Select,
 	SelectItem,
-	Checkbox,
-	NumberInput,
-	Loading
-} from 'carbon-components-react';
+	TextInput
+} from '@carbon/react';
 import { css } from 'emotion';
 import debounce from 'lodash/debounce';
 import { saveBlob, getFullFileName } from '../../../../utils/file-tools';
@@ -29,9 +31,9 @@ const exportSettingForm = css`
 const exportSettingFormGroup = css`
 	width: 320px;
 	display: flex;
+	gap: 1rem;
 `;
 const previewContainer = css`
-	float: left;
 	background-color: #e0e0e0;
 	width: 100%;
 	height: 100%;
@@ -39,15 +41,22 @@ const previewContainer = css`
 	margin-left: 1rem;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+`;
+const modalBody = css`
+	display: flex;
+	margin-top: 3rem;
 `;
 const selectInputWH = css`
 	margin-bottom: 1.5rem;
-	float: left;
 	width: 150px;
 `;
 const selectInput = css`
 	margin-bottom: 1.5rem;
 	width: 320px;
+`;
+const loadingState = css`
+	margin-top: 1rem;
 `;
 
 const chartImage = css`
@@ -57,16 +66,21 @@ const chartImage = css`
 	margin: 0;
 `;
 
+interface ExportSettings {
+	width: number,
+	height: number,
+	unit: string,
+	ratioLock: boolean,
+	chartName: string,
+	format: string,
+	curRatio: number
+}
+
 export interface ExportImageProps {
 	chart: any,
 	displayedModal: ShareOptionsModals | null,
 	setDisplayedModal: (displayedModal: ShareOptionsModals | null) => void
 }
-
-let updatePreviewUrl = async() => console.log('updatePreviewUrl not initialized yet');
-let handleResize = () => console.log('handleResize not initialized yet');
-const doInputChange = debounce(() => updatePreviewUrl(), 400);
-const doUpdatePreviewSize = debounce(() => handleResize(), 200);
 
 export const ExportImageModal = (props: ExportImageProps) => {
 	const [modalState, dispatchModal] = useContext(ModalContext);
@@ -76,9 +90,9 @@ export const ExportImageModal = (props: ExportImageProps) => {
 	const pathSegments = location.split('/');
 
 	const id = `${chartState.currentId || pathSegments[pathSegments.length - 1]}`;
-	const chart = chartState.charts.find((chart: any) => chart.id === id);
+	const chart = chartState.charts.find((chartItem: any) => chartItem.id === id);
 
-	const exportSettings = {
+	const [inputs, setInputs] = useState<ExportSettings>({
 		width: 800,
 		height: 400,
 		unit: 'pixels',
@@ -86,110 +100,139 @@ export const ExportImageModal = (props: ExportImageProps) => {
 		chartName: props.chart.title,
 		format: 'image/png',
 		curRatio: 0
-	};
-	const [inputs, setInputs] = useState(exportSettings);
+	});
 	const [previewUrl, setPreviewUrl] = useState(props.chart.preview);
 	const [isPerformingAction, setIsPerformingAction] = useState(false);
+	const [isUpdatingPreview, setIsUpdatingPreview] = useState(false);
 	const previewContainerRef = useRef<HTMLDivElement>(null);
-	const [imageContainerSize, setImageContainerSize] = useState<any>();
+	const [imageContainerSize, setImageContainerSize] = useState({
+		width: 800,
+		height: 400
+	});
 
-	handleResize = () => {
-		if (!previewContainerRef || !previewContainerRef.current) {
+	const handleResize = useCallback(() => {
+		if (!previewContainerRef.current) {
 			return;
 		}
+
 		setImageContainerSize({
 			width: previewContainerRef.current.offsetWidth,
 			height: previewContainerRef.current.offsetHeight
 		});
-	};
-	useEffect(() => {
-		window.addEventListener('resize', doUpdatePreviewSize);
-		if(previewContainerRef) {
-			doUpdatePreviewSize();
-		}
-		return () => {
-			window.removeEventListener('resize', doUpdatePreviewSize);
-		};
-	}, [previewContainerRef]);
+	}, []);
 
-	const getPreviewSize = (width: number, height: number) => {
-		let fitRatio: number;
-		if (width <= height) {
-			// preview is square or tall rectangle (mobile)
-			fitRatio = imageContainerSize.height / height;
-		} else {
-			// preview is long rectangle
-			fitRatio = imageContainerSize.width / width;
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		handleResize();
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, [handleResize]);
+
+	const getPreviewSize = useCallback((width: number, height: number) => {
+		const { width: containerWidth, height: containerHeight } = imageContainerSize;
+
+		if (!containerWidth || !containerHeight) {
+			return {
+				width,
+				height
+			};
 		}
+
+		const fitRatio = width <= height
+			? containerHeight / height
+			: containerWidth / width;
+
 		return {
 			width: width * fitRatio,
 			height: height * fitRatio
 		};
-	};
+	}, [imageContainerSize]);
 
-	updatePreviewUrl = async() => {
-		const previewSize = getPreviewSize(inputs.width, inputs.height);
+	const updatePreviewUrl = useCallback(async(currentInputs: ExportSettings) => {
+		const previewSize = getPreviewSize(currentInputs.width, currentInputs.height);
 		const renderProps: RenderProps = {
 			id: props.chart.id,
-			name: inputs.chartName,
-			width: inputs.width,
-			height: inputs.height,
+			name: currentInputs.chartName,
+			width: currentInputs.width,
+			height: currentInputs.height,
 			preview: {
-				format: inputs.format,
+				format: currentInputs.format,
 				width: previewSize.width,
 				height: previewSize.height
 			}
 		};
-		const imageBlob = await getChartPreview(chart, renderProps);
-		const reader = new FileReader();
-		reader.readAsDataURL(imageBlob ? imageBlob : new Blob());
-		reader.onloadend = () => {
-			const imageUrl: string = reader.result ? reader.result.toString() : '';
-			setPreviewUrl(imageUrl);
+
+		setIsUpdatingPreview(true);
+
+		try {
+			const imageBlob = await getChartPreview(chart, renderProps);
+			const reader = new FileReader();
+
+			reader.onloadend = () => {
+				const imageUrl: string = reader.result ? reader.result.toString() : '';
+				setPreviewUrl(imageUrl);
+				setIsUpdatingPreview(false);
+			};
+
+			reader.onerror = () => {
+				setIsUpdatingPreview(false);
+			};
+
+			reader.readAsDataURL(imageBlob ? imageBlob : new Blob());
+		} catch (error) {
+			setIsUpdatingPreview(false);
+		}
+	}, [chart, getPreviewSize, props.chart.id]);
+
+	const debouncedPreviewUpdate = useMemo(
+		() => debounce((nextInputs: ExportSettings) => updatePreviewUrl(nextInputs), 400),
+		[updatePreviewUrl]
+	);
+
+	useEffect(() => {
+		debouncedPreviewUpdate(inputs);
+
+		return () => {
+			debouncedPreviewUpdate.cancel();
 		};
-	};
+	}, [debouncedPreviewUpdate, inputs]);
 
 	const onSubmit = async() => {
 		if (isPerformingAction) {
 			return;
 		}
+
 		setIsPerformingAction(true);
-		const renderProps: RenderProps = {
-			id: props.chart.id,
-			name: inputs.chartName,
-			width: inputs.width,
-			height: inputs.height,
-			format: inputs.format
-		};
-		const imageBlob = await getChartPreview(chart, renderProps);
 
-		const fileName = getFullFileName(inputs.chartName, inputs.format);
-		saveBlob(imageBlob, fileName);
-		setIsPerformingAction(false);
+		try {
+			const renderProps: RenderProps = {
+				id: props.chart.id,
+				name: inputs.chartName,
+				width: inputs.width,
+				height: inputs.height,
+				format: inputs.format
+			};
+			const imageBlob = await getChartPreview(chart, renderProps);
+
+			const fileName = getFullFileName(inputs.chartName, inputs.format);
+			saveBlob(imageBlob, fileName);
+			dispatchModal({ type: ModalActionType.closeModal });
+		} finally {
+			setIsPerformingAction(false);
+		}
 	};
 
-	const handleChange = (id: any, value: any) => {
-		setInputs({
-			...inputs,
-			[id]: value
-		});
-		doInputChange();
-	};
-
-	useEffect(() => {
-		doInputChange();
+	const handleChange = useCallback((updatedInputs: ExportSettings) => {
+		setInputs(updatedInputs);
 	}, []);
 
 	return (
 		<Modal
-			hasForm
-			onRequestSubmit={() => {
-				// TODO look into whether it's a better user experience to have the
-				// processing in the background, perhaps with the saving indication
-				onSubmit().then(dispatchModal({ type: ModalActionType.closeModal }));
-			}}
-			onSecondarySubmit={() => { props.setDisplayedModal(ShareOptionsModals.SHARE_OPTIONS); }}
 			open={modalState.ShowModal && props.displayedModal === ShareOptionsModals.IMAGE_EXPORTS}
+			onRequestSubmit={onSubmit}
+			onSecondarySubmit={() => { props.setDisplayedModal(ShareOptionsModals.SHARE_OPTIONS); }}
 			onRequestClose={() => dispatchModal({ type: ModalActionType.closeModal })}
 			primaryButtonText='Export'
 			secondaryButtonText='Back to export options'
@@ -197,107 +240,120 @@ export const ExportImageModal = (props: ExportImageProps) => {
 			<p>
 				Export a static image of this chart for use in presentation decks or designs.
 			</p>
-			<div style={{
-				display: 'flex',
-				marginTop: '3rem'
-			}}>
-				<ExportModalSettings inputs={inputs} handleChange={handleChange} />
+			<div className={modalBody}>
+				<ExportModalSettings inputs={inputs} onChange={handleChange} />
 				<div className={previewContainer} ref={previewContainerRef}>
 					<img
-						id="previewimg"
+						id='previewimg'
 						className={chartImage}
 						src={previewUrl}
-						alt={`chart preview: ${props.chart.title}`} />
+						alt={`Chart preview: ${props.chart.title}`} />
 				</div>
 			</div>
-			<Loading active={isPerformingAction} />
+			{(isUpdatingPreview || isPerformingAction) && (
+				<div className={loadingState}>
+					<InlineLoading
+						description={isPerformingAction ? 'Exporting image' : 'Updating preview'}
+						status='active'
+					/>
+				</div>
+			)}
 		</Modal>
 	);
 };
 
-const ExportModalSettings = ({ inputs, handleChange }: any) => {
-	// We assume that a working ratio is never 0 (no 1D charts)
-	const getRatio = () => (inputs.width / inputs.height).toFixed(2);
+interface ExportModalSettingsProps {
+	inputs: ExportSettings,
+	onChange: (inputs: ExportSettings) => void
+}
 
-	const onDimensionChange = (id: any, value: any) => {
-		if (!id) {
-			return;
-		}
-		if (isNaN(value) || value === 0) {
-			// eslint-disable-next-line no-param-reassign
-			value = 1;
-		}
+const ExportModalSettings = ({ inputs, onChange }: ExportModalSettingsProps) => {
+	const getRatio = () => Number((inputs.width / inputs.height).toFixed(2));
+
+	const updateField = (id: keyof ExportSettings, value: string | number | boolean) => {
+		onChange({
+			...inputs,
+			[id]: value
+		});
+	};
+
+	const onDimensionChange = (id: 'width' | 'height', value: number) => {
+		const safeValue = Number.isNaN(value) || value === 0 ? 1 : value;
+
 		if (!inputs.ratioLock) {
-			handleChange(id, value);
+			updateField(id, safeValue);
 			return;
 		}
-		if (inputs.curRatio === 0) {
-			handleChange('curRatio', getRatio());
-		}
-		handleChange(id, value);
+
+		const currentRatio = inputs.curRatio === 0 ? getRatio() : inputs.curRatio;
+		const nextInputs: ExportSettings = {
+			...inputs,
+			curRatio: currentRatio,
+			[id]: safeValue
+		};
+
 		if (id === 'width') {
-			handleChange('height', (value / inputs.curRatio).toFixed(0));
+			nextInputs.height = Number((safeValue / currentRatio).toFixed(0));
 		} else {
-			handleChange('width', (value * inputs.curRatio).toFixed(0));
+			nextInputs.width = Number((safeValue * currentRatio).toFixed(0));
 		}
-	};
-	const numInputOnchange = (event: any) => {
-		onDimensionChange(event.target.id, parseFloat(event.target.value));
-	};
-	const numInputOnClick = (event: any) => {
-		if (event.imaginaryTarget && event.imaginaryTarget.value) {
-			onDimensionChange(event.imaginaryTarget.id, parseFloat(event.imaginaryTarget.value));
-		}
-	};
-	const inputChange = (event: any) => {
-		handleChange(event.target.id, event.target.value);
+
+		onChange(nextInputs);
 	};
 
 	return (
 		<Form className={exportSettingForm}>
 			<TextInput
 				className={selectInput}
-				id={'chartName'}
-				labelText={'Name'}
-				placeholder={'Chart name'}
-				onChange={inputChange}
+				id='chartName'
+				labelText='Name'
+				placeholder='Chart name'
+				onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+					updateField('chartName', event.target.value);
+				}}
 				type='text'
-				defaultValue={inputs.chartName} />
+				value={inputs.chartName} />
 			<div className={exportSettingFormGroup}>
 				<NumberInput
 					className={selectInputWH}
 					id='width'
 					label='Width'
 					value={inputs.width}
-					onClick={numInputOnClick}
-					onChange={numInputOnchange} />
+					min={1}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						onDimensionChange('width', parseFloat(event.target.value));
+					}} />
 				<NumberInput
 					className={selectInputWH}
 					id='height'
 					label='Height'
 					value={inputs.height}
-					onClick={numInputOnClick}
-					onChange={numInputOnchange} />
+					min={1}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						onDimensionChange('height', parseFloat(event.target.value));
+					}} />
 			</div>
 			<Checkbox
 				className={selectInput}
 				id='ratioLock'
 				labelText='Preserve aspect ratio'
-				defaultChecked={inputs.ratioLock}
-				onChange={(event: any) => handleChange('ratioLock', event)} />
+				checked={inputs.ratioLock}
+				onChange={(_: any, { checked }: { checked: boolean }) => {
+					updateField('ratioLock', checked);
+				}} />
 			<Select
 				className={selectInput}
 				value={inputs.unit}
-				id={'unit'}
-				onChange={inputChange}
+				id='unit'
+				onChange={(event: React.ChangeEvent<HTMLSelectElement>) => updateField('unit', event.target.value)}
 				labelText='Units'>
 				<SelectItem text='pixels' value='pixels' />
 			</Select>
 			<Select
 				className={selectInput}
 				value={inputs.format}
-				id={'format'}
-				onChange={inputChange}
+				id='format'
+				onChange={(event: React.ChangeEvent<HTMLSelectElement>) => updateField('format', event.target.value)}
 				labelText='Format'>
 				<SelectItem text='png' value='image/png' />
 				<SelectItem text='jpeg' value='image/jpeg' />
