@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import {
 	addColumn,
 	removeColumn,
