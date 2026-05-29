@@ -5,8 +5,8 @@ import {
 	Modal,
 	Tag,
 	InlineNotification,
-	NotificationActionButton
-} from 'carbon-components-react';
+	ActionableNotification
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { generateNewChart } from './generate-new-chart';
@@ -56,7 +56,7 @@ const chartOptionTile = css`
 		max-height: 17.3125rem;
 	}
 	text-align: center;
-	.bx--tile {
+	.cds--tile {
 		padding-right: 16px;
 	}
 	margin-top: 12px;
@@ -114,7 +114,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 		<Modal
 			open={props.shouldDisplay}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--tile--selectable'
+			selectorPrimaryFocus='.cds--tile--selectable'
 			onRequestSubmit={() => {
 				generateChart();
 				props.setLastVisitedModal(ChartWizardModals.CHOOSE_CHART_MODAL);
@@ -132,34 +132,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 			{
 				props.uploadedData.wasDataModified
 					? <InlineNotification
-						{ ...warningNotificationProps }
-						actions={
-							<>
-								<NotificationActionButton
-									onClick={() => {
-										props.setUploadedData({
-											data: [],
-											wasDataModified: false
-										});
-										props.setRecommendedCharts([]);
-									}}>
-									Use demo data
-								</NotificationActionButton>
-								{
-									props.uploadedData && props.uploadedData.originalData
-									&& <NotificationActionButton
-										onClick={() => {
-											props.setUploadedData({
-												data: props.uploadedData.originalData,
-												wasDataModified: false
-											});
-											props.setRecommendedCharts([]);
-										}}>
-										Use unmodified data
-									</NotificationActionButton>
-								}
-							</>
-						} />
+						{ ...warningNotificationProps } />
 					: null
 			}
 			<p>Choose a type of chart and click done to start editing your new chart</p>
