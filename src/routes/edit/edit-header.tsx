@@ -3,12 +3,12 @@ import { css } from 'emotion';
 import {
 	Button,
 	InlineLoading
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
-	Copy16,
-	Delete16,
-	Settings16,
-	Share16
+	Copy,
+	TrashCan,
+	Settings,
+	Share
 } from '@carbon/icons-react';
 import { ModalContext, ModalActionType } from '../../context/modal-context';
 import { ChartModal } from './chart-modal';
@@ -30,7 +30,7 @@ const editHeader = css`
 		}
 		.title-subheading {
 			display: inline-flex;
-			.bx--inline-loading {
+			.cds--inline-loading {
 				width: auto;
 				position: relative;
 				margin-left: 10px;
@@ -110,7 +110,7 @@ export const EditHeader = ({ chart }: any) => {
 								id: chart.id
 							})}
 							className={toolBarAction}>
-							<Copy16 fill="black" />
+							<Copy size={16} fill="black" />
 						</Button>
 						<Button
 							kind='ghost'
@@ -121,7 +121,7 @@ export const EditHeader = ({ chart }: any) => {
 								id: chart.id
 							})}
 							className={toolBarAction}>
-							<Delete16 fill="black" />
+							<TrashCan size={16} fill="black" />
 						</Button>
 						<Button
 							kind='ghost'
@@ -132,7 +132,7 @@ export const EditHeader = ({ chart }: any) => {
 								id: chart.id
 							})}
 							className={toolBarAction}>
-							<Share16 fill="black" />
+							<Share size={16} fill="black" />
 						</Button>
 						<Button
 							kind='ghost'
@@ -143,7 +143,7 @@ export const EditHeader = ({ chart }: any) => {
 								id: chart.id
 							})}
 							className={toolBarAction}>
-							<Settings16 fill="black" />
+							<Settings size={16} fill="black" />
 						</Button>
 					</div>
 				</div>

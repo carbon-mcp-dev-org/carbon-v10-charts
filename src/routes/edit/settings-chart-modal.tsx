@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import {
 	Modal,
 	TextInput,
-	Checkbox,
-	TooltipDefinition
-} from 'carbon-components-react';
+	Checkbox
+} from '@carbon/react';
+import { DefinitionTooltip } from '@carbon/react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import { ChartActionType, ChartsContext } from '../../context/charts-context';
 import './chart-modal.scss';
@@ -66,12 +66,9 @@ export const SettingsChartModal = ({ chart }: any) => {
 				checked={isTemplate}
 				labelText='Make this chart a &nbsp;'
 				onChange={(event: any) => setIsTemplate(event)}/>
-			<TooltipDefinition
-				tooltipText='Setting a chart as a template makes it an easy starting point
-				for future charts.'
-				direction='bottom'>
+			<DefinitionTooltip definition='Setting a chart as a template makes it an easy starting point for future charts.'>
 				template
-			</TooltipDefinition>
+			</DefinitionTooltip>
 		</Modal>
 	);
 };
