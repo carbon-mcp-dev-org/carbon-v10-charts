@@ -17,12 +17,12 @@ import { css } from 'emotion';
 
 
 const app = css`
-	nav.bx--side-nav--expanded + div#edit-content {
+	nav.cds--side-nav--expanded + div#edit-content {
 		padding-left: calc(2.25rem + 16rem);
 	}
 	// This is the viewport width that causes the edit header items to overlap
 	@media screen and (max-width: 38.75rem) {
-		nav.bx--side-nav--expanded + div#edit-content {
+		nav.cds--side-nav--expanded + div#edit-content {
 			padding-left: 36px;
 		}
 	}

@@ -1,0 +1,8 @@
+{
+  "fileMapping": {
+    "carbon-components.d.ts": {
+      "action": "deleted",
+      "reason": "Removed by migration agent as part of framework migration. File src/carbon-components.d.ts is framework-specific and not required in the target configuration."
+    }
+  }
+}
