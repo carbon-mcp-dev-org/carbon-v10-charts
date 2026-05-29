@@ -1,13 +1,12 @@
-// TODO: Delete this when the carbon grid components are actually available
 import React, { PropsWithChildren } from 'react';
-import { cx } from 'emotion';
+import { Column, Grid } from '@carbon/react';
 
 export type RowProps = PropsWithChildren<{
 	styles?: any
 }>;
 
 export const Row = ({ styles, children }: RowProps) => (
-	<div className={cx('bx--row', styles)}>{children}</div>
+	<Grid className={styles}>{children}</Grid>
 );
 
 export interface ColDefinition {
@@ -23,14 +22,11 @@ export type ColProps = PropsWithChildren<{
 
 export const Col = ({ cols, render, children }: ColProps) => {
 	const baseRender = render ?? ((props) => <div {...props} />);
-	const classes = cx({
-		[`bx--col-sm-${cols?.sm}`]: !!cols?.sm ?? false,
-		[`bx--col-md-${cols?.md}`]: !!cols?.md ?? false,
-		[`bx--col-lg-${cols?.lg}`]: !!cols?.lg ?? false,
-		'bx--col': !!cols
-	});
 	return baseRender({
-		className: classes,
-		children
+		children: (
+			<Column sm={cols?.sm} md={cols?.md} lg={cols?.lg}>
+				{children}
+			</Column>
+		)
 	});
 };

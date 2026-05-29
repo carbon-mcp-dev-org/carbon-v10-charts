@@ -1,9 +1,10 @@
 import React from 'react';
 import {
+	Header as ShellHeader,
 	HeaderMenuButton,
 	HeaderName,
-	Header as ShellHeader
-} from 'carbon-components-react/lib/components/UIShell';
+	SkipToContent
+} from '@carbon/react';
 import { css } from 'emotion';
 import { useHistory } from 'react-router-dom';
 
@@ -17,7 +18,8 @@ export const Header = ({ isSideNavExpanded, setIsSideNavExpanded }: any) => {
 	`;
 
 	return (
-		<ShellHeader aria-label="IBM Carbon Charts Builder" role='banner' tabIndex={0}>
+		<ShellHeader aria-label="IBM Carbon Charts Builder">
+			<SkipToContent href="#main-content" />
 			<HeaderMenuButton
 				aria-label={`${isSideNavExpanded ? 'Close menu' : 'Open menu'}`}
 				isActive={isSideNavExpanded}

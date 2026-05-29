@@ -16,7 +16,7 @@ import {
 	Switch,
 	TextInput,
 	Tooltip
-} from 'carbon-components-react';
+} from '@carbon/react';
 import capitalize from 'lodash/capitalize';
 import get from 'lodash/get';
 import set from 'lodash/set';
@@ -29,12 +29,8 @@ const inputWrap = css`
 
 const accordionCss = css`
 	border-right: 1px solid #D6D6D6;
-    max-width: 256px;
-    display: inline-block;
-
-	.bx--accordion__item--active .bx--accordion__content {
-		padding: 0;
-	}
+	max-width: 256px;
+	display: inline-block;
 `;
 
 export const ChartOptionsPane = ({ chart, setChart }: any) => {
