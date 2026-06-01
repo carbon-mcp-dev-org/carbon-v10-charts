@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import { App } from './app';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import { App } from "./app";
+import * as serviceWorker from "./serviceWorker";
 
 // eslint-disable-next-line
-const render = (Component: any) => ReactDOM.render(<Component/>, document.getElementById('root'));
+const render = (Component: any) =>
+  ReactDOM.render(<Component />, document.getElementById("root"));
 
 render(App);
 
@@ -14,10 +15,20 @@ render(App);
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-if (module.hot) {
-	module.hot.accept('./app', () => {
-		console.info('App updated');
-		const Next = require('./app').App;
-		render(Next);
-	});
+if (
+  (
+    module as NodeModule & {
+      hot?: { accept: (path: string, callback: () => void) => void };
+    }
+  ).hot
+) {
+  (
+    module as NodeModule & {
+      hot?: { accept: (path: string, callback: () => void) => void };
+    }
+  ).hot?.accept("./app", () => {
+    console.info("App updated");
+    const Next = require("./app").App;
+    render(Next);
+  });
 }
