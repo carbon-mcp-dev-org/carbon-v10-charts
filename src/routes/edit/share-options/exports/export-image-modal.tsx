@@ -13,7 +13,7 @@ import {
 	Checkbox,
 	NumberInput,
 	Loading
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import debounce from 'lodash/debounce';
 import { saveBlob, getFullFileName } from '../../../../utils/file-tools';
