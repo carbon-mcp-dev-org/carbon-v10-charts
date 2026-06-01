@@ -222,7 +222,6 @@ export const processDataFile = (file: any) => new Promise<any>((resolve, reject)
 export const warningNotificationProps = {
 	lowContrast: true,
 	role: 'alert',
-	notificationType: 'inline',
 	kind: 'warning',
 	title: 'Uploaded data has been modified',
 	subtitle: 'data did not match expected format so we modified it so you can still use it'
@@ -231,7 +230,6 @@ export const warningNotificationProps = {
 export const errorNotificationProps = {
 	lowContrast: true,
 	role: 'alert',
-	notificationType: 'inline',
 	kind: 'error',
 	title: 'Error',
 	subtitle: ''
