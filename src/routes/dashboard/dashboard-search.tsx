@@ -5,14 +5,14 @@ import {
 	OverflowMenu,
 	OverflowMenuItem,
 	Search
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import {
-	Add16,
-	ArrowsVertical16,
-	CheckmarkFilled16
+	Add,
+	ArrowsVertical,
+	CheckmarkFilled
 	// 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️
-	// SettingsAdjust16
+	// SettingsAdjust
 } from '@carbon/icons-react';
 
 import { css } from 'emotion';
@@ -78,7 +78,7 @@ export const DashboardSearch = ({
 		<OverflowMenu
 			className={sortButton}
 			ariaLabel='Sort chart'
-			renderIcon = {() => <ArrowsVertical16 />}
+			renderIcon = {() => <ArrowsVertical size={16} />}
 			onClick={(event: { stopPropagation: () => void; }) => { event.stopPropagation(); }}>
 			<OverflowMenuItem
 				itemText={(
@@ -86,7 +86,7 @@ export const DashboardSearch = ({
 						Newest to oldest
 						{
 							sortDirection === SortDirection.Ascending
-								? <CheckmarkFilled16 />
+								? <CheckmarkFilled size={16} />
 								: null
 						}
 					</div>
@@ -98,7 +98,7 @@ export const DashboardSearch = ({
 						Oldest to newest
 						{
 							sortDirection === SortDirection.Descending
-								? <CheckmarkFilled16 />
+								? <CheckmarkFilled size={16} />
 								: null
 						}
 					</div>
@@ -110,9 +110,9 @@ export const DashboardSearch = ({
 		<Button
 			onClick={() => { setDisplayWizard(!displayWizard); }}
 			title='Add new chart'
-			aria-label='Add new chart'>
+			aria-label='Add new chart'
+			renderIcon={Add}>
 			New chart
-			<Add16 className='bx--btn__icon'/>
 		</Button>
 	</div>
 );
