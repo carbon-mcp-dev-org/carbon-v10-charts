@@ -1,53 +1,48 @@
-import React from 'react';
+import React from "react";
+
+import { Button, OverflowMenu, OverflowMenuItem, Search } from "@carbon/react";
 
 import {
-	Button,
-	OverflowMenu,
-	OverflowMenuItem,
-	Search
-} from '@carbon/react';
+  Add,
+  ArrowsVertical,
+  CheckmarkFilled,
+  // 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️
+  // SettingsAdjust
+} from "@carbon/icons-react";
 
-import {
-	Add,
-	ArrowsVertical,
-	CheckmarkFilled
-	// 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️
-	// SettingsAdjust
-} from '@carbon/icons-react';
-
-import { css } from 'emotion';
+import { css } from "emotion";
 
 const dashboardSearchWrapper = css`
-	display: flex;
-	width: 100%;
+  display: flex;
+  width: 100%;
 
-	// 520px is the point which the search bar becomes too small to display the full text, moves
-	// the sort, share, and add button below the search bar at this point.
-	@media screen and (max-width: 520px) {
-		flex-wrap: wrap;
-	}
+  // 520px is the point which the search bar becomes too small to display the full text, moves
+  // the sort, share, and add button below the search bar at this point.
+  @media screen and (max-width: 520px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const searchInput = css`
-	input {
-		border-bottom: none;
+  input {
+    border-bottom: none;
 
-		@media screen and (max-width: 520px) {
-			margin-bottom: 15px;
-		}
-	}
+    @media screen and (max-width: 520px) {
+      margin-bottom: 15px;
+    }
+  }
 `;
 
 const sortButton = css`
-	height: 3rem;
-	width: 3rem;
-	background-color: #f4f4f4;
+  height: 3rem;
+  width: 3rem;
+  background-color: #f4f4f4;
 `;
 
 const sortOverflowItem = css`
-	svg {
-		transform: translate(7px, 1.5px);
-	}
+  svg {
+    transform: translate(7px, 1.5px);
+  }
 `;
 
 // 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️
@@ -58,61 +53,72 @@ const sortOverflowItem = css`
 // `;
 
 export enum SortDirection {
-	Ascending,
-	Descending
+  Ascending,
+  Descending,
 }
 
 export const DashboardSearch = ({
-	onSearchHandler,
-	onSortHandler,
-	displayWizard,
-	setDisplayWizard,
-	sortDirection
+  onSearchHandler,
+  onSortHandler,
+  displayWizard,
+  setDisplayWizard,
+  sortDirection,
 }: any) => (
-	<div className={dashboardSearchWrapper}>
-		<Search
-			labelText='Chart'
-			placeHolderText='Search charts'
-			className={searchInput}
-			onChange={(event: any) => onSearchHandler(event.target.value ? event.target.value : '')} />
-		<OverflowMenu
-			className={sortButton}
-			ariaLabel='Sort chart'
-			renderIcon = {() => <ArrowsVertical size={16} />}
-			onClick={(event: { stopPropagation: () => void; }) => { event.stopPropagation(); }}>
-			<OverflowMenuItem
-				itemText={(
-					<div className={sortOverflowItem}>
-						Newest to oldest
-						{
-							sortDirection === SortDirection.Ascending
-								? <CheckmarkFilled size={16} />
-								: null
-						}
-					</div>
-				)}
-				onClick={() => {onSortHandler(SortDirection.Ascending);}} />
-			<OverflowMenuItem
-				itemText={(
-					<div className={sortOverflowItem}>
-						Oldest to newest
-						{
-							sortDirection === SortDirection.Descending
-								? <CheckmarkFilled size={16} />
-								: null
-						}
-					</div>
-				)}
-				onClick={() => {onSortHandler(SortDirection.Descending);}} />
-		</OverflowMenu>
-		{/* 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️ */}
-		{/* <Button kind='ghost' className={shareButton}><SettingsAdjust16 /></Button> */}
-		<Button
-			onClick={() => { setDisplayWizard(!displayWizard); }}
-			title='Add new chart'
-			aria-label='Add new chart'>
-			New chart
-			<Add size={16} className='cds--btn__icon'/>
-		</Button>
-	</div>
+  <div className={dashboardSearchWrapper}>
+    <Search
+      labelText="Chart"
+      placeholder="Search charts"
+      className={searchInput}
+      onChange={(event: any) =>
+        onSearchHandler(event.target.value ? event.target.value : "")
+      }
+    />
+    <OverflowMenu
+      className={sortButton}
+      ariaLabel="Sort chart"
+      renderIcon={() => <ArrowsVertical size={16} />}
+      onClick={(event: { stopPropagation: () => void }) => {
+        event.stopPropagation();
+      }}
+    >
+      <OverflowMenuItem
+        itemText={
+          <div className={sortOverflowItem}>
+            Newest to oldest
+            {sortDirection === SortDirection.Ascending ? (
+              <CheckmarkFilled size={16} />
+            ) : null}
+          </div>
+        }
+        onClick={() => {
+          onSortHandler(SortDirection.Ascending);
+        }}
+      />
+      <OverflowMenuItem
+        itemText={
+          <div className={sortOverflowItem}>
+            Oldest to newest
+            {sortDirection === SortDirection.Descending ? (
+              <CheckmarkFilled size={16} />
+            ) : null}
+          </div>
+        }
+        onClick={() => {
+          onSortHandler(SortDirection.Descending);
+        }}
+      />
+    </OverflowMenu>
+    {/* 🏗️🏗️🏗️ Under construction, add in later 🏗️🏗️🏗️ */}
+    {/* <Button kind='ghost' className={shareButton}><SettingsAdjust16 /></Button> */}
+    <Button
+      onClick={() => {
+        setDisplayWizard(!displayWizard);
+      }}
+      title="Add new chart"
+      aria-label="Add new chart"
+    >
+      New chart
+      <Add size={16} className="cds--btn__icon" />
+    </Button>
+  </div>
 );
