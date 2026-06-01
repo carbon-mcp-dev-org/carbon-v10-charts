@@ -12,8 +12,11 @@ import {
 	CodeSnippet,
 	Modal,
 	Tab,
+	TabList,
+	TabPanels,
+	TabPanel,
 	Tabs
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { ModalContext, ModalActionType } from '../../../../context/modal-context';
 
@@ -33,7 +36,7 @@ const titleWrapper = css`
 `;
 
 const codeSnippet = css`
-    .bx--copy-btn {
+    .cds--copy-btn {
         background: white;
     }
 `;
@@ -71,138 +74,126 @@ export const ExportCode = ({
 			onSecondarySubmit={() => { setDisplayedModal(ShareOptionsModals.SHARE_OPTIONS); }}
 			modalHeading={`Export "${chart.title}" code`}>
 			<Tabs>
-				<Tab
-					id='vanilla'
-					label='Vanilla JS'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Vanilla JS Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(vanillaCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(vanillaCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? vanillaCode[fileName]
-											: JSON.stringify(vanillaCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='Angular'
-					label='Angular'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Angular Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(angularCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(angularCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? angularCode[fileName]
-											: JSON.stringify(angularCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='react'
-					label='React'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>React Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(reactCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(reactCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? reactCode[fileName]
-											: JSON.stringify(reactCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
-				<Tab
-					id='vue'
-					label='Vue'
-					role='presentation'
-					tabIndex={0}>
-					<div className={titleWrapper}>
-						<h3>Vue Code</h3>
-						<a
-							href={generateSandboxUrl(createChartSandbox(vueCode))}
-							target='_blank'
-							rel='noopener noreferrer'>
-							Edit on CodeSandbox
-						</a>
-					</div>
-					{
-						Object.keys(vueCode).map((fileName: string) => (
-							<div className={codeSnippetWrapper} key={fileName}>
-								<p>{fileName}</p>
-								<CodeSnippet
-									type='multi'
-									light
-									className={codeSnippet}
-									copyButtonDescription={`Copy ${fileName} to clipboard`}>
-									{
-										fileName !== 'package.json'
-											? vueCode[fileName]
-											: JSON.stringify(vueCode[fileName], null, '\t')
-									}
-								</CodeSnippet>
-							</div>
-						))
-					}
-				</Tab>
+				<TabList aria-label="Code export framework options">
+					<Tab>Vanilla JS</Tab>
+					<Tab>Angular</Tab>
+					<Tab>React</Tab>
+					<Tab>Vue</Tab>
+				</TabList>
+				<TabPanels>
+					<TabPanel>
+						<div className={titleWrapper}>
+							<h3>Vanilla JS Code</h3>
+							<a
+								href={generateSandboxUrl(createChartSandbox(vanillaCode))}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Edit on CodeSandbox
+							</a>
+						</div>
+						{
+							Object.keys(vanillaCode).map((fileName: string) => (
+								<div className={codeSnippetWrapper} key={fileName}>
+									<p>{fileName}</p>
+									<CodeSnippet
+										type='multi'
+										className={codeSnippet}
+										copyButtonDescription={`Copy ${fileName} to clipboard`}>
+										{
+											fileName !== 'package.json'
+												? vanillaCode[fileName]
+												: JSON.stringify(vanillaCode[fileName], null, '\t')
+										}
+									</CodeSnippet>
+								</div>
+							))
+						}
+					</TabPanel>
+					<TabPanel>
+						<div className={titleWrapper}>
+							<h3>Angular Code</h3>
+							<a
+								href={generateSandboxUrl(createChartSandbox(angularCode))}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Edit on CodeSandbox
+							</a>
+						</div>
+						{
+							Object.keys(angularCode).map((fileName: string) => (
+								<div className={codeSnippetWrapper} key={fileName}>
+									<p>{fileName}</p>
+									<CodeSnippet
+										type='multi'
+										className={codeSnippet}
+										copyButtonDescription={`Copy ${fileName} to clipboard`}>
+										{
+											fileName !== 'package.json'
+												? angularCode[fileName]
+												: JSON.stringify(angularCode[fileName], null, '\t')
+										}
+									</CodeSnippet>
+								</div>
+							))
+						}
+					</TabPanel>
+					<TabPanel>
+						<div className={titleWrapper}>
+							<h3>React Code</h3>
+							<a
+								href={generateSandboxUrl(createChartSandbox(reactCode))}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Edit on CodeSandbox
+							</a>
+						</div>
+						{
+							Object.keys(reactCode).map((fileName: string) => (
+								<div className={codeSnippetWrapper} key={fileName}>
+									<p>{fileName}</p>
+									<CodeSnippet
+										type='multi'
+										className={codeSnippet}
+										copyButtonDescription={`Copy ${fileName} to clipboard`}>
+										{
+											fileName !== 'package.json'
+												? reactCode[fileName]
+												: JSON.stringify(reactCode[fileName], null, '\t')
+										}
+									</CodeSnippet>
+								</div>
+							))
+						}
+					</TabPanel>
+					<TabPanel>
+						<div className={titleWrapper}>
+							<h3>Vue Code</h3>
+							<a
+								href={generateSandboxUrl(createChartSandbox(vueCode))}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Edit on CodeSandbox
+							</a>
+						</div>
+						{
+							Object.keys(vueCode).map((fileName: string) => (
+								<div className={codeSnippetWrapper} key={fileName}>
+									<p>{fileName}</p>
+									<CodeSnippet
+										type='multi'
+										className={codeSnippet}
+										copyButtonDescription={`Copy ${fileName} to clipboard`}>
+										{
+											fileName !== 'package.json'
+												? vueCode[fileName]
+												: JSON.stringify(vueCode[fileName], null, '\t')
+										}
+									</CodeSnippet>
+								</div>
+							))
+						}
+					</TabPanel>
+				</TabPanels>
 			</Tabs>
 		</Modal>
 	);

@@ -36,7 +36,7 @@ import '${chartTheme}';
 import { css } from 'emotion';
 
 const app = css\`
-	svg.bx--cc--chart-svg {
+	svg.cds--cc--chart-svg {
 		height: 500px;
 		min-width: 100%
 	}
