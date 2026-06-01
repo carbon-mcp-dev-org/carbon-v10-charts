@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import { withRouter } from 'react-router-dom';
 
 export const LinkButton = withRouter((props: any) => {

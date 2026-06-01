@@ -1,15 +1,23 @@
-@import '~carbon-components/scss/globals/scss/styles';
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
 
 .g100 {
-	@import '~@carbon/charts/styles-g100';
+@use '@carbon/charts/scss' as charts with (
+  $theme: 'g100'
+);
 }
 
 .g90 {
-	@import '~@carbon/charts/styles-g90';
+@use '@carbon/charts/scss' as charts with (
+  $theme: 'g90'
+);
 }
 
 .g10 {
-	@import '~@carbon/charts/styles-g10';
+@use '@carbon/charts/scss' as charts with (
+  $theme: 'g10'
+);
 }
 
 .render-preview {
@@ -17,7 +25,7 @@
 		min-height: 0;
 	}
 	
-	.bx--cc--chart-svg {
+	.cds--cc--chart-svg {
 		height: 100%;
 	}
 }
