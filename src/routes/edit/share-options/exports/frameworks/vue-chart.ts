@@ -78,8 +78,7 @@ new Vue({
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-vue': '0.40.11',
+			'@carbon/charts-vue': '^1.27.11',
 			'@vue/cli-plugin-babel': '4.1.1',
 			d3: '5.15.0',
 			vue: '2.6.11'
