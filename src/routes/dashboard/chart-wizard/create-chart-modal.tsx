@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { ChartWizardModals } from './chart-wizard';
-
-import { Modal } from 'carbon-components-react';
-import { ChartLineData32, DocumentAdd32 } from '@carbon/icons-react';
+import { Modal } from '@carbon/react';
+import { ChartLineData, DocumentAdd } from '@carbon/icons-react';
 import { css } from 'emotion';
+
+import { ChartWizardModals } from './chart-wizard';
 import { SelectionTile } from '../../../components/selection-tile';
 
 const createChartTiles = css`
@@ -20,9 +20,6 @@ const createChartTiles = css`
 const createChartTile = css`
 	width: 48%;
 	height: 200px;
-	.bx--tile {
-		height: 100%;
-	}
 `;
 
 export enum CreateOptions {
@@ -43,23 +40,20 @@ export const CreateChartModal = (props: CreateChartModalProps) => {
 	return (
 		<Modal
 			open={props.shouldDisplay}
-			hasForm
+			passiveModal={false}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--tile--selectable'
 			onSecondarySubmit={() => {
 				props.setShouldDisplay(false);
 				props.setLastVisitedModal(ChartWizardModals.CREATE_CHART_MODAL);
 			}}
-			onRequestSubmit={
-				() => {
-					props.setDisplayedModal(
-						selectedCreateOption === CreateOptions.UPLOAD_DATA
-							? ChartWizardModals.UPLOAD_DATA_MODAL
-							: ChartWizardModals.CHOOSE_CHART_MODAL
-					);
-					props.setLastVisitedModal(ChartWizardModals.CREATE_CHART_MODAL);
-				}
-			}
+			onRequestSubmit={() => {
+				props.setDisplayedModal(
+					selectedCreateOption === CreateOptions.UPLOAD_DATA
+						? ChartWizardModals.UPLOAD_DATA_MODAL
+						: ChartWizardModals.CHOOSE_CHART_MODAL
+				);
+				props.setLastVisitedModal(ChartWizardModals.CREATE_CHART_MODAL);
+			}}
 			onRequestClose={() => {
 				props.setShouldDisplay(false);
 				props.setLastVisitedModal(ChartWizardModals.CREATE_CHART_MODAL);
@@ -73,13 +67,13 @@ export const CreateChartModal = (props: CreateChartModalProps) => {
 				<SelectionTile
 					styles={createChartTile}
 					onChange={() => { setSelectedCreateOption(CreateOptions.UPLOAD_DATA); }}
-					icon={<DocumentAdd32 />}
+					icon={<DocumentAdd size={32} aria-hidden="true" />}
 					selected={selectedCreateOption === CreateOptions.UPLOAD_DATA}
 					label='Upload data'/>
 				<SelectionTile
 					styles={createChartTile}
 					onChange={() => { setSelectedCreateOption(CreateOptions.CHOOSE_TYPE); }}
-					icon={<ChartLineData32 />}
+					icon={<ChartLineData size={32} aria-hidden="true" />}
 					selected={selectedCreateOption === CreateOptions.CHOOSE_TYPE}
 					label='Pick a chart type'/>
 			</div>

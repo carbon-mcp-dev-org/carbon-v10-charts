@@ -122,8 +122,7 @@ export const DataTableToolbar = ({
 				</TableToolbarAction>
 			</TableToolbarMenu>
 			<FileUploaderButton
-				size='small'
-				title='Upload data'
+				size='sm'
 				labelText="Upload data"
 				multiple={false}
 				onChange={(event: any) => { handleUpload(event.target.files); }}>
