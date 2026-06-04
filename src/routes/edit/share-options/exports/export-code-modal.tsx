@@ -12,8 +12,11 @@ import {
 	CodeSnippet,
 	Modal,
 	Tab,
+	TabList,
+	TabPanels,
+	TabPanel,
 	Tabs
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { ModalContext, ModalActionType } from '../../../../context/modal-context';
 
@@ -33,7 +36,7 @@ const titleWrapper = css`
 `;
 
 const codeSnippet = css`
-    .bx--copy-btn {
+    .cds--copy-btn {
         background: white;
     }
 `;
@@ -71,11 +74,14 @@ export const ExportCode = ({
 			onSecondarySubmit={() => { setDisplayedModal(ShareOptionsModals.SHARE_OPTIONS); }}
 			modalHeading={`Export "${chart.title}" code`}>
 			<Tabs>
-				<Tab
-					id='vanilla'
-					label='Vanilla JS'
-					role='presentation'
-					tabIndex={0}>
+				<TabList aria-label="Code export framework options">
+					<Tab>Vanilla JS</Tab>
+					<Tab>Angular</Tab>
+					<Tab>React</Tab>
+					<Tab>Vue</Tab>
+				</TabList>
+				<TabPanels>
+				<TabPanel>
 					<div className={titleWrapper}>
 						<h3>Vanilla JS Code</h3>
 						<a
@@ -103,12 +109,8 @@ export const ExportCode = ({
 							</div>
 						))
 					}
-				</Tab>
-				<Tab
-					id='Angular'
-					label='Angular'
-					role='presentation'
-					tabIndex={0}>
+				</TabPanel>
+				<TabPanel>
 					<div className={titleWrapper}>
 						<h3>Angular Code</h3>
 						<a
@@ -136,12 +138,8 @@ export const ExportCode = ({
 							</div>
 						))
 					}
-				</Tab>
-				<Tab
-					id='react'
-					label='React'
-					role='presentation'
-					tabIndex={0}>
+				</TabPanel>
+				<TabPanel>
 					<div className={titleWrapper}>
 						<h3>React Code</h3>
 						<a
@@ -169,12 +167,8 @@ export const ExportCode = ({
 							</div>
 						))
 					}
-				</Tab>
-				<Tab
-					id='vue'
-					label='Vue'
-					role='presentation'
-					tabIndex={0}>
+				</TabPanel>
+				<TabPanel>
 					<div className={titleWrapper}>
 						<h3>Vue Code</h3>
 						<a
@@ -202,7 +196,8 @@ export const ExportCode = ({
 							</div>
 						))
 					}
-				</Tab>
+				</TabPanel>
+				</TabPanels>
 			</Tabs>
 		</Modal>
 	);

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { NotificationActionType, NotificationContext } from '../../context/notification-context';
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import {
 	ChartActionType,
