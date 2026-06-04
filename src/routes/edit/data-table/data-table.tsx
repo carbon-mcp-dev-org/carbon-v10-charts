@@ -12,7 +12,7 @@ import {
 	TableContainer,
 	InlineNotification,
 	NotificationActionButton
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { warningNotificationProps } from '../../../utils/file-tools';
 import { ChartActionType, ChartsContext } from '../../../context/charts-context';

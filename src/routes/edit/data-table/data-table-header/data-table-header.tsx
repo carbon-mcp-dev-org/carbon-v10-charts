@@ -7,7 +7,7 @@ import {
 	TableHeader,
 	TableRow,
 	TextInput
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { updateKey } from '../data-table-tools';
 import { DataTableState } from '../data-table';
