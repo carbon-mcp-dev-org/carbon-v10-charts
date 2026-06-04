@@ -4,9 +4,9 @@ import { css } from 'emotion';
 import {
 	Modal,
 	Tag,
-	InlineNotification,
-	NotificationActionButton
-} from 'carbon-components-react';
+	ActionableNotification,
+	Button
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { generateNewChart } from './generate-new-chart';
@@ -43,7 +43,6 @@ const chartOptions = css`
 	flex-wrap: wrap;
 	justify-content: space-between;
 
-	// This is the viewport width that causes the selection tiles to overlap.
 	@media screen and (max-width: 45rem) {
 		flex-direction: column;
 	}
@@ -56,16 +55,19 @@ const chartOptionTile = css`
 		max-height: 17.3125rem;
 	}
 	text-align: center;
-	.bx--tile {
-		padding-right: 16px;
-	}
 	margin-top: 12px;
 	margin-bottom: 12px;
 
-	// This is the viewport width that causes the selection tiles to overlap.
 	@media screen and (max-width: 45rem) {
 		width: 100%;
 	}
+`;
+
+const notificationActions = css`
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	margin-top: 0.75rem;
 `;
 
 export interface ChooseChartModalProps {
@@ -86,9 +88,9 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 	const [horizontal, setHorizontal] = useState(false);
 	const [, dispatch] = useContext(ChartsContext);
 
-	const setSelectedChartType = (chartType: ChartType, horizontal = false) => {
+	const setSelectedChartType = (chartType: ChartType, isHorizontal = false) => {
 		doSetSelectedChartType(chartType);
-		setHorizontal(horizontal);
+		setHorizontal(isHorizontal);
 	};
 	const history = useHistory();
 
@@ -114,7 +116,6 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 		<Modal
 			open={props.shouldDisplay}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--tile--selectable'
 			onRequestSubmit={() => {
 				generateChart();
 				props.setLastVisitedModal(ChartWizardModals.CHOOSE_CHART_MODAL);
@@ -124,42 +125,49 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 				props.setDisplayedModal(props.lastVisitedModal);
 				props.setLastVisitedModal(ChartWizardModals.CHOOSE_CHART_MODAL);
 			}}
-			hasForm
 			modalHeading='Create new chart'
 			primaryButtonText='Done'
 			secondaryButtonText='Back'
 			primaryButtonDisabled={selectedChartType === null}>
 			{
 				props.uploadedData.wasDataModified
-					? <InlineNotification
+					? <ActionableNotification
 						{ ...warningNotificationProps }
-						actions={
-							<>
-								<NotificationActionButton
+						inline
+						title={warningNotificationProps.title || 'Uploaded data was modified'}
+						subtitle={warningNotificationProps.subtitle || ''}
+						actionButtonLabel=''
+						hideCloseButton>
+						<div className={notificationActions}>
+							<Button
+								kind='ghost'
+								size='sm'
+								onClick={() => {
+									props.setUploadedData({
+										data: [],
+										wasDataModified: false
+									});
+									props.setRecommendedCharts([]);
+								}}>
+								Use demo data
+							</Button>
+							{
+								props.uploadedData && props.uploadedData.originalData
+								&& <Button
+									kind='ghost'
+									size='sm'
 									onClick={() => {
 										props.setUploadedData({
-											data: [],
+											data: props.uploadedData.originalData,
 											wasDataModified: false
 										});
 										props.setRecommendedCharts([]);
 									}}>
-									Use demo data
-								</NotificationActionButton>
-								{
-									props.uploadedData && props.uploadedData.originalData
-									&& <NotificationActionButton
-										onClick={() => {
-											props.setUploadedData({
-												data: props.uploadedData.originalData,
-												wasDataModified: false
-											});
-											props.setRecommendedCharts([]);
-										}}>
-										Use unmodified data
-									</NotificationActionButton>
-								}
-							</>
-						} />
+									Use unmodified data
+								</Button>
+							}
+						</div>
+					</ActionableNotification>
 					: null
 			}
 			<p>Choose a type of chart and click done to start editing your new chart</p>

@@ -3,18 +3,17 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 import {
 	Modal,
-	FileUploaderButton,
+	FileUploader,
 	FileUploaderItem
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { processDataFile } from '../../../utils/file-tools';
 import { getGroupNames } from '../../../utils/chart-tools';
 
 const fileUploaderModal = css`
-	span.bx--file__selected-file {
-		background: white;
-		margin-top: 10px;
+	.cds--file-container {
+		margin-top: 1rem;
 	}
 `;
 
@@ -43,7 +42,6 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 
 		const groupNames = getGroupNames(chartData);
 
-		// Very basic recommendation right now... work in progress :)
 		if (groupNames.length === 1) {
 			chartRecommendations.push.apply(chartRecommendations, [
 				ChartType.DONUT_CHART,
@@ -65,15 +63,15 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 		props.setRecommendedCharts(chartRecommendations);
 	};
 
-	const onFileAdded = (event: FileList) => {
-		// Clears error state which may have lingered from previous file
+	const onFileAdded = (event: any) => {
 		setFileErrorState({
 			isFileInvalid: false,
 			errorMessage: ''
 		});
-		// This takes the first file from the fileList, in case multiple files are uploaded.
-		const [fileUploaded] = Array.from(event);
-		setUploadedFile(fileUploaded);
+
+		const files = event?.target?.files || event?.addedFiles || [];
+		const [fileUploaded] = Array.from(files);
+		setUploadedFile(fileUploaded || null);
 	};
 
 	const onFileDelete = () => {
@@ -104,7 +102,6 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 			className={fileUploaderModal}
 			open={props.shouldDisplay}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--btn--primary'
 			onRequestSubmit={() => handleFileUpload()}
 			primaryButtonDisabled={!uploadedFile}
 			onRequestClose={() => { props.setShouldDisplay(false); }}
@@ -119,13 +116,19 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 				Start with uploading the chart data or create a new chart from scratch.
 			</p>
 			<div className={fileUploaderHeading}>
-				<strong className={'bx--file--label'}>Upload data file</strong>
-				<p className={'bx--label-description'}>Only .json and .csv files</p>
+				<FileUploader
+					labelTitle='Upload data file'
+					labelDescription='Only .json and .csv files'
+					buttonLabel='Add file'
+					buttonKind='primary'
+					size='md'
+					filenameStatus='edit'
+					iconDescription='Delete file'
+					multiple={false}
+					accept={['.json', '.csv']}
+					onChange={onFileAdded}
+				/>
 			</div>
-			<FileUploaderButton
-				multiple={false}
-				accept={['.json', '.csv']}
-				onChange={(event: any) => { onFileAdded(event.target.files); }}/>
 			{
 				uploadedFile
 					? <FileUploaderItem
@@ -133,6 +136,7 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 						name={uploadedFile.name}
 						invalid={fileErrorState.isFileInvalid}
 						errorSubject={fileErrorState.errorMessage}
+						iconDescription='Delete file'
 						onDelete={() => {
 							onFileDelete();
 							props.setUploadedData({
