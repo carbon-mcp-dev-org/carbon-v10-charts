@@ -1,23 +1,22 @@
 import React from 'react';
-import {
-	Col, Main, Row
-} from '../components';
-import { Link } from 'react-router-dom';
+import { Add } from '@carbon/icons-react';
+import { Button, Column, Grid } from '@carbon/react';
+import { useHistory } from 'react-router-dom';
 
-import { Add16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Main } from '../components';
 
-export const Data = () => (
-	<Main>
-		<Row>
-			<Col cols={{ sm: 1 }}>
-				<Link to="/data/add">
-					<Button>
-							Add a dataset
-						<Add16 className="bx--btn__icon"/>
+export const Data = () => {
+	const history = useHistory();
+
+	return (
+		<Main>
+			<Grid>
+				<Column sm={4} md={8} lg={16}>
+					<Button renderIcon={Add} iconDescription="Add a dataset" onClick={() => history.push('/data/add')}>
+						Add a dataset
 					</Button>
-				</Link>
-			</Col>
-		</Row>
-	</Main>
-);
+				</Column>
+			</Grid>
+		</Main>
+	);
+};
