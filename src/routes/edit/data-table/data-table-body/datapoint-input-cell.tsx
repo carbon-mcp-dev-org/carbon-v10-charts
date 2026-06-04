@@ -89,7 +89,6 @@ export const DatapointInputCell = ({
 				<DatePickerInput
 					labelText=''
 					aria-label='Modify datapoint date'
-					iconDescription='Open calendar'
 					id={`datepicker-input-${state.rowKeys[rowIndex]}-${state.columnKeys[columnIndex]}`}/>
 			</DatePicker>
 		}

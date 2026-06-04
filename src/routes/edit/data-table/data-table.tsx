@@ -11,7 +11,7 @@ import {
 	Table,
 	TableContainer,
 	InlineNotification,
-	NotificationActionButton
+	ActionableNotification
 } from '@carbon/react';
 import { css } from 'emotion';
 import { warningNotificationProps } from '../../../utils/file-tools';
@@ -31,13 +31,13 @@ const dataTable = css`
 	tbody tr:hover td {
 		background: white;
 	}
-	.bx--table-header-label {
+	.cds--table-header-label {
 		padding-bottom: 0;
 	}
-	.bx--label {
+	.cds--label {
 		display: none;
 	}
-	.bx--table-header-label {
+	.cds--table-header-label {
 		display: flex;
 	}
 `;
@@ -51,7 +51,7 @@ const tableContainer = css`
 	min-width: 14rem;
 	width: 100%;
 	margin-top: 1rem;
-	.bx--data-table-header {
+	.cds--data-table-header {
 		background: white;
 	}
 `;
@@ -132,26 +132,28 @@ export const DataTable = ({ chart }: any) => {
 		<section aria-label={`Data table for '${chart.title}'`} tabIndex={0}>
 			{
 				notificationState.visible
-					? <InlineNotification
-						{ ...notificationState.notificationProps }
-						onCloseButtonClick={() => setNotificationState({
-							...notificationState,
-							visible: false
-						})}
-						actions={
-							notificationState.notificationProps.kind === 'warning'
-								&& <NotificationActionButton
-									onClick={() => {
-										updateData(notificationState.backupData);
-										setNotificationState({
-											...notificationState,
-											visible: false,
-											backupData: []
-										});
-									}}>
-									Revert change
-								</NotificationActionButton>
-						} />
+					? notificationState.notificationProps.kind === 'warning'
+						? <ActionableNotification
+							{ ...notificationState.notificationProps }
+							onCloseButtonClick={() => setNotificationState({
+								...notificationState,
+								visible: false
+							})}
+							actionButtonLabel="Revert change"
+							onActionButtonClick={() => {
+								updateData(notificationState.backupData);
+								setNotificationState({
+									...notificationState,
+									visible: false,
+									backupData: []
+								});
+							}} />
+						: <InlineNotification
+							{ ...notificationState.notificationProps }
+							onCloseButtonClick={() => setNotificationState({
+								...notificationState,
+								visible: false
+							})} />
 					: null
 			}
 			<TableContainer
