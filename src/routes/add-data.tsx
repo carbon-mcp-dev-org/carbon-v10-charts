@@ -8,7 +8,7 @@ import {
 	FormLabel,
 	Switch,
 	TextInput
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import {
 	Col, LinkButton, Main, Row
@@ -65,7 +65,7 @@ export const AddData = () => {
 	return (
 		<Main>
 			<Row>
-				<h1 className="bx--col">New dataset</h1>
+				<h1 className="cds--col">New dataset</h1>
 			</Row>
 			<Row>
 				<Col cols={{ sm: 2 }}>
