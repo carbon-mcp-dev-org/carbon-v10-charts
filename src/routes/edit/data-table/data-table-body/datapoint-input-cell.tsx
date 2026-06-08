@@ -5,7 +5,7 @@ import {
 	DatePickerInput,
 	TableCell,
 	TextInput
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { updateDatapoint } from '../data-table-tools';
 import { DataTableState } from '../data-table';
@@ -89,7 +89,6 @@ export const DatapointInputCell = ({
 				<DatePickerInput
 					labelText=''
 					aria-label='Modify datapoint date'
-					iconDescription='Open calendar'
 					id={`datepicker-input-${state.rowKeys[rowIndex]}-${state.columnKeys[columnIndex]}`}/>
 			</DatePicker>
 		}

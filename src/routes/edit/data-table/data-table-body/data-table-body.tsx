@@ -3,7 +3,7 @@ import React from 'react';
 import { DatasetInputCell } from './dataset-input-cell';
 import { DatapointInputCell } from './datapoint-input-cell';
 
-import { TableBody, TableRow } from 'carbon-components-react';
+import { TableBody, TableRow } from '@carbon/react';
 import { DataTableState } from '../data-table';
 
 export interface DataTableBodyProps {
