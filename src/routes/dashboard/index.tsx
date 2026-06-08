@@ -27,7 +27,7 @@ const chartSort = (sortDirection: SortDirection) => function(a: any, b: any) {
 // styles for the header (title and content switcher)
 // to override carbon styling for <main>
 const headerRowSyles = css`
-	background: white;
+	background: var(--cds-background);
 	padding: 0 2rem;
 	margin: 0 -2rem;
 	padding-top: 2rem;
@@ -42,7 +42,7 @@ const searchRowStyles = css`
 	padding-right: 0;
 	padding-left: 1rem;
 	margin: 0 -2rem;
-	border-bottom: 1px solid #d6d6d6;
+	border-bottom: 1px solid var(--cds-border-subtle-01);
 	.cds--col {
 		padding-right: 0;
 	}

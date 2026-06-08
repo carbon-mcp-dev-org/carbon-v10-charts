@@ -41,7 +41,7 @@ const searchInput = css`
 const sortButton = css`
 	height: 3rem;
 	width: 3rem;
-	background-color: #f4f4f4;
+	background-color: var(--cds-layer-01);
 `;
 
 const sortOverflowItem = css`
@@ -77,8 +77,8 @@ export const DashboardSearch = ({
 			onChange={(event: any) => onSearchHandler(event.target.value ? event.target.value : '')} />
 		<OverflowMenu
 			className={sortButton}
-			ariaLabel='Sort chart'
-	renderIcon = {() => <ArrowsVertical size={16} />}
+			aria-label='Sort chart'
+			renderIcon={() => <ArrowsVertical size={16} />}
 			onClick={(event: { stopPropagation: () => void; }) => { event.stopPropagation(); }}>
 			<OverflowMenuItem
 				itemText={(

@@ -65,7 +65,7 @@ export const SettingsChartModal = ({ chart }: any) => {
 				id='setChartAsTemplate'
 				checked={isTemplate}
 				labelText='Make this chart a &nbsp;'
-				onChange={(event: any) => setIsTemplate(event)}/>
+				onChange={(checked: boolean) => setIsTemplate(checked)}/>
 			<DefinitionTooltip
 				definition='Setting a chart as a template makes it an easy starting point
 				for future charts.'

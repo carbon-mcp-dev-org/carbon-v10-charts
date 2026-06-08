@@ -12,6 +12,9 @@ import {
 	CodeSnippet,
 	Modal,
 	Tab,
+	TabList,
+	TabPanel,
+	TabPanels,
 	Tabs
 } from '@carbon/react';
 import { css } from 'emotion';

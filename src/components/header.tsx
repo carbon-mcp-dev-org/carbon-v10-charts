@@ -17,15 +17,13 @@ export const Header = ({ isSideNavExpanded, setIsSideNavExpanded }: any) => {
 	`;
 
 	return (
-		<ShellHeader aria-label="IBM Carbon Charts Builder" role='banner' tabIndex={0}>
+		<ShellHeader aria-label="IBM Carbon Charts Builder">
 			<HeaderMenuButton
-				aria-label={`${isSideNavExpanded ? 'Close menu' : 'Open menu'}`}
+				aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
 				isActive={isSideNavExpanded}
 				onClick={() => setIsSideNavExpanded(!isSideNavExpanded)} />
 			<HeaderName
 				prefix="IBM"
-				tabIndex={0}
-				title='Carbon Charts Builder home'
 				className={headerName}
 				onClick={() => history.push('/')}
 				onKeyDown={(event: any) => event.key === 'Enter' && history.push('/')}>

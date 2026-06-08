@@ -28,7 +28,7 @@ const inputWrap = css`
 `;
 
 const accordionCss = css`
-	border-right: 1px solid #D6D6D6;
+	border-right: 1px solid var(--cds-border-subtle-01);
     max-width: 256px;
     display: inline-block;
 
@@ -408,14 +408,13 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 						id='animations'
 						labelText='Animations'
 						checked={getFieldValue('animations', false)}
-						onChange={(event: any) => handleChange('animations', event)} />
+						onChange={(checked: boolean) => handleChange('animations', checked)} />
 					<Checkbox
 						className={inputWrap}
 						id='tooltip-enabled'
 						labelText='Tooltips'
 						checked={getFieldValue('tooltip-enabled', true)}
-						onChange={
-							(event: any) => handleChange('tooltip-enabled', event)}
+						onChange={(checked: boolean) => handleChange('tooltip-enabled', checked)}
 					/>
 					{
 						(chart.type === 'line-chart'
@@ -490,9 +489,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 							id='override-color-variants'
 							labelText='Override'
 							checked={overrideVariantsCount}
-							onChange={
-								(event: any) => setOverrideVariantsCount(event)
-							} />
+							onChange={(checked: boolean) => setOverrideVariantsCount(checked)} />
 					</div>
 					<Select
 						className={inputWrap}

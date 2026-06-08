@@ -157,7 +157,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Simple bar chart'
 					tag={
 						isRecommended(ChartType.SIMPLE_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -168,7 +168,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Simple horizontal bar chart'
 					tag={
 						isRecommended(ChartType.SIMPLE_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -179,7 +179,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Scatter chart'
 					tag={
 						isRecommended(ChartType.SCATTER_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -190,7 +190,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Donut chart'
 					tag={
 						isRecommended(ChartType.DONUT_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -201,7 +201,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Stacked bar chart'
 					tag={
 						isRecommended(ChartType.STACKED_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -212,7 +212,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Horizontal stacked bar chart'
 					tag={
 						isRecommended(ChartType.STACKED_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -223,7 +223,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Line chart'
 					tag={
 						isRecommended(ChartType.LINE_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -234,7 +234,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Area chart'
 					tag={
 						isRecommended(ChartType.AREA_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -245,7 +245,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Stacked area chart'
 					tag={
 						isRecommended(ChartType.STACKED_AREA_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -256,7 +256,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Grouped bar chart'
 					tag={
 						isRecommended(ChartType.GROUPED_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -267,7 +267,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Horizontal grouped bar chart'
 					tag={
 						isRecommended(ChartType.GROUPED_BAR_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 				<SelectionTile
@@ -278,7 +278,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					label='Pie chart'
 					tag={
 						isRecommended(ChartType.PIE_CHART)
-							? <Tag type='blue'>Recommended</Tag>
+							? <Tag kind='blue'>Recommended</Tag>
 							: null
 					} />
 			</div>

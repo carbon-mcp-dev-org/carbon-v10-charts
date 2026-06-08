@@ -25,11 +25,11 @@ const dataTable = css`
 		padding: 0;
 	}
 	td, tr {
-		background: white;
+		background: var(--cds-layer-01);
 		height: auto;
 	}
 	tbody tr:hover td {
-		background: white;
+		background: var(--cds-layer-01);
 	}
 	.cds--table-header-label {
 		padding-bottom: 0;
@@ -52,7 +52,7 @@ const tableContainer = css`
 	width: 100%;
 	margin-top: 1rem;
 	.cds--data-table-header {
-		background: white;
+		background: var(--cds-layer-01);
 	}
 `;
 

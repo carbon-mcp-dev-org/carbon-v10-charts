@@ -11,7 +11,7 @@ const editPageContent = css`
 	height: 100%;
 	top: 2rem;
 	max-width: 100%;
-	background: #f4f4f4;
+	background: var(--cds-layer-01);
 	height: 100%;
 	padding: 1rem 2rem;
 `;

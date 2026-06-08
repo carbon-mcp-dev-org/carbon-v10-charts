@@ -13,7 +13,7 @@ import { getGroupNames } from '../../../utils/chart-tools';
 
 const fileUploaderModal = css`
 	span.cds--file__selected-file {
-		background: white;
+		background: var(--cds-layer-01);
 		margin-top: 10px;
 	}
 `;
