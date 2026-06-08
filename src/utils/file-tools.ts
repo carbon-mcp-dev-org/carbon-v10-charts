@@ -1,6 +1,18 @@
-import { extension } from 'mime-types';
 import Papa from 'papaparse';
 import { getGroupNames } from './chart-tools';
+
+const getExtensionFromMimeType = (mimeType: string): string => {
+	const mimeMap: Record<string, string> = {
+		'image/png': 'png',
+		'image/jpeg': 'jpg',
+		'image/jpg': 'jpg',
+		'image/svg+xml': 'svg',
+		'application/json': 'json',
+		'text/csv': 'csv',
+		'text/plain': 'txt'
+	};
+	return mimeMap[mimeType] || 'bin';
+};
 
 const restoreUploadedJsonData = (chartData: any) => {
 	let restoredUploadedData = chartData;
@@ -71,7 +83,7 @@ const restoreUploadedJsonData = (chartData: any) => {
 
 
 export const getFullFileName = (name: string, mimeType: string) => (
-	`${name}.${extension(mimeType)}`
+	`${name}.${getExtensionFromMimeType(mimeType)}`
 );
 
 export const saveFile = (url: string, fileName: string) => {

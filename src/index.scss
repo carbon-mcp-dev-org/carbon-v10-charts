@@ -1,23 +1,12 @@
-@import '~carbon-components/scss/globals/scss/styles';
-
-.g100 {
-	@import '~@carbon/charts/styles-g100';
-}
-
-.g90 {
-	@import '~@carbon/charts/styles-g90';
-}
-
-.g10 {
-	@import '~@carbon/charts/styles-g10';
-}
+@use '@carbon/react';
+@use '@carbon/charts/scss' as charts;
 
 .render-preview {
 	.chart-holder {
 		min-height: 0;
 	}
 	
-	.bx--cc--chart-svg {
+	.cds--cc--chart-svg {
 		height: 100%;
 	}
 }

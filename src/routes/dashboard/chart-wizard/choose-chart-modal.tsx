@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import {
 	Modal,
 	Tag,
-	InlineNotification,
 	ActionableNotification
 } from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
@@ -33,7 +32,6 @@ import {
 } from '../../../context';
 import { useHistory } from 'react-router-dom';
 import { SelectionTile } from '../../../components/selection-tile';
-import { warningNotificationProps } from '../../../utils/file-tools';
 
 const chartOptions = css`
 	margin-left: 30px;
