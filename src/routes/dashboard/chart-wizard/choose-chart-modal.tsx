@@ -4,9 +4,8 @@ import { css } from 'emotion';
 import {
 	Modal,
 	Tag,
-	InlineNotification,
-	NotificationActionButton
-} from 'carbon-components-react';
+	InlineNotification
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { generateNewChart } from './generate-new-chart';
@@ -56,7 +55,7 @@ const chartOptionTile = css`
 		max-height: 17.3125rem;
 	}
 	text-align: center;
-	.bx--tile {
+	.cds--tile {
 		padding-right: 16px;
 	}
 	margin-top: 12px;
@@ -114,7 +113,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 		<Modal
 			open={props.shouldDisplay}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--tile--selectable'
+			selectorPrimaryFocus='.cds--tile--selectable'
 			onRequestSubmit={() => {
 				generateChart();
 				props.setLastVisitedModal(ChartWizardModals.CHOOSE_CHART_MODAL);
@@ -135,7 +134,9 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 						{ ...warningNotificationProps }
 						actions={
 							<>
-								<NotificationActionButton
+								<button
+									type="button"
+									className="cds--inline-notification__action-button"
 									onClick={() => {
 										props.setUploadedData({
 											data: [],
@@ -144,10 +145,12 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 										props.setRecommendedCharts([]);
 									}}>
 									Use demo data
-								</NotificationActionButton>
+								</button>
 								{
 									props.uploadedData && props.uploadedData.originalData
-									&& <NotificationActionButton
+									&& <button
+										type="button"
+										className="cds--inline-notification__action-button"
 										onClick={() => {
 											props.setUploadedData({
 												data: props.uploadedData.originalData,
@@ -156,7 +159,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 											props.setRecommendedCharts([]);
 										}}>
 										Use unmodified data
-									</NotificationActionButton>
+									</button>
 								}
 							</>
 						} />

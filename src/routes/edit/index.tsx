@@ -1,25 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import { css } from 'emotion';
+import { Content } from '@carbon/react';
 import { EditHeader } from './edit-header';
 import { DataTable } from './data-table/data-table';
 import { ChartActionType, ChartsContext, useFetchOne } from '../../context/charts-context';
 import { EditChart } from '../../components/edit-chart';
 
 const editPageContent = css`
-	position: absolute;
-	width: 100vw;
-	height: 100%;
-	top: 2rem;
+	width: 100%;
+	min-height: 100%;
 	max-width: 100%;
 	background: #f4f4f4;
-	height: 100%;
 	padding: 1rem 2rem;
 `;
 
 export const Edit = ({ match }: any) => {
 	const [state, dispatch] = useContext(ChartsContext);
 	useFetchOne(match.params.id, dispatch);
-	const chart = state.charts.find((chart: any) => chart.id === match.params.id);
+	const chart = state.charts.find((currentChart: any) => currentChart.id === match.params.id);
 
 	const setChart = (updatedChart: any) => {
 		dispatch({
@@ -29,6 +27,8 @@ export const Edit = ({ match }: any) => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ top: 0 });
+
 		if (chart && chart.title) {
 			document.title = `Edit "${chart.title}"`;
 		} else {
@@ -37,19 +37,18 @@ export const Edit = ({ match }: any) => {
 	}, [chart]);
 
 	return (
-		<div
+		<Content
 			id='edit-content'
 			className={editPageContent}>
-			{ chart && <EditHeader chart={chart}/> }
+			{chart && <EditHeader chart={chart} />}
 			<div>
-				{
-					chart
-					&& <>
+				{chart && (
+					<>
 						<EditChart chart={chart} setChart={setChart} />
-						{ chart.data && <DataTable chart={chart} /> }
+						{chart.data && <DataTable chart={chart} />}
 					</>
-				}
+				)}
 			</div>
-		</div>
+		</Content>
 	);
 };

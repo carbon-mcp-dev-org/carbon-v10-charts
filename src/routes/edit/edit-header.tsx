@@ -1,15 +1,7 @@
 import React, { useContext } from 'react';
 import { css } from 'emotion';
-import {
-	Button,
-	InlineLoading
-} from 'carbon-components-react';
-import {
-	Copy16,
-	Delete16,
-	Settings16,
-	Share16
-} from '@carbon/icons-react';
+import { Button, InlineLoading } from '@carbon/react';
+import { Copy, Settings, Share, TrashCan } from '@carbon/icons-react';
 import { ModalContext, ModalActionType } from '../../context/modal-context';
 import { ChartModal } from './chart-modal';
 import { ChartsContext } from '../../context';
@@ -30,7 +22,8 @@ const editHeader = css`
 		}
 		.title-subheading {
 			display: inline-flex;
-			.bx--inline-loading {
+			align-items: center;
+			.cds--inline-loading {
 				width: auto;
 				position: relative;
 				margin-left: 10px;
@@ -44,7 +37,7 @@ const editHeader = css`
 			}
 		}
 		.chart-title {
-			whitespace: nowrap;
+			white-space: nowrap;
 			font-weight: bold;
 			padding-left: 12px;
 			padding-right: 16px;
@@ -71,7 +64,7 @@ const chartEditToolBar = css`
 		height: 3rem;
 	}
 	.toolBarButtons {
-		min-width: 13.75rem
+		inline-size: 13.75rem;
 	}
 `;
 
@@ -90,61 +83,66 @@ export const EditHeader = ({ chart }: any) => {
 					<p className='chart-title'>{chart.title}</p>
 
 					<div className='title-subheading'>
-						<div className='date-wrap'>{`Last modified ${ chart.lastModified}`}</div>
-						{!!currentlyProcessing
-							&& <InlineLoading
+						<div className='date-wrap'>{`Last modified ${chart.lastModified}`}</div>
+						{!!currentlyProcessing && (
+							<InlineLoading
 								description='Chart is updating...'
 								iconDescription='Active loading indicator'
-								status='active' />
-						}
+								status='active'
+							/>
+						)}
 					</div>
 				</div>
 				<div className={chartEditToolBar}>
 					<div className='toolBarButtons'>
 						<Button
 							kind='ghost'
-							aria-label='Duplicate chart'
-							title='Duplicate chart'
+							hasIconOnly
+							iconDescription='Duplicate chart'
+							tooltipAlignment='center'
+							renderIcon={Copy}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setDuplicationModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Copy16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
-							aria-label='Delete chart'
-							title='Delete chart'
+							hasIconOnly
+							iconDescription='Delete chart'
+							tooltipAlignment='center'
+							renderIcon={TrashCan}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setDeletionModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Delete16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
-							aria-label='Share chart'
-							title='Share chart'
+							hasIconOnly
+							iconDescription='Share chart'
+							tooltipAlignment='center'
+							renderIcon={Share}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setShareModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Share16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
-							aria-label='Chart settings'
-							title='Chart settings'
+							hasIconOnly
+							iconDescription='Chart settings'
+							tooltipAlignment='center'
+							renderIcon={Settings}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setSettingsModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Settings16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 					</div>
 				</div>
 			</div>

@@ -5,14 +5,14 @@ import {
 	Modal,
 	FileUploaderButton,
 	FileUploaderItem
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { processDataFile } from '../../../utils/file-tools';
 import { getGroupNames } from '../../../utils/chart-tools';
 
 const fileUploaderModal = css`
-	span.bx--file__selected-file {
+	span.cds--file__selected-file {
 		background: white;
 		margin-top: 10px;
 	}
@@ -104,7 +104,7 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 			className={fileUploaderModal}
 			open={props.shouldDisplay}
 			shouldSubmitOnEnter={false}
-			selectorPrimaryFocus='.bx--btn--primary'
+			selectorPrimaryFocus='.cds--btn--primary'
 			onRequestSubmit={() => handleFileUpload()}
 			primaryButtonDisabled={!uploadedFile}
 			onRequestClose={() => { props.setShouldDisplay(false); }}
@@ -119,8 +119,8 @@ export const UploadDataModal = (props: UploadDataModalProps) => {
 				Start with uploading the chart data or create a new chart from scratch.
 			</p>
 			<div className={fileUploaderHeading}>
-				<strong className={'bx--file--label'}>Upload data file</strong>
-				<p className={'bx--label-description'}>Only .json and .csv files</p>
+				<strong className={'cds--file--label'}>Upload data file</strong>
+				<p className={'cds--label-description'}>Only .json and .csv files</p>
 			</div>
 			<FileUploaderButton
 				multiple={false}
