@@ -1,0 +1,11 @@
+{"id":"290b583d-d3e4-4133-8649-5a7054a5f181","ts":"2026-06-01T16:14:14.257Z","path":"src/routes/edit/data-table/data-table.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"7eb6bbcd-4e35-4d8f-85b6-2c0a300e38c7","ts":"2026-06-01T16:14:20.600Z","path":"src/routes/edit/data-table/data-table.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"1c8637b9-e3c0-4164-a794-b2d9e77dbd46","ts":"2026-06-01T16:14:23.987Z","path":"src/routes/edit/data-table/data-table.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"4685cebc-8a43-4207-9201-774c1ff9999d","ts":"2026-06-01T16:14:27.407Z","path":"src/routes/edit/data-table/data-table-header/data-table-header.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"f0932185-34e1-4a3c-8502-d5e355408576","ts":"2026-06-01T16:14:30.543Z","path":"src/routes/edit/data-table/data-table-body/data-table-body.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"4f6a2a57-5fbc-41ec-b6b8-e88bb64fced2","ts":"2026-06-01T16:14:34.351Z","path":"src/routes/edit/data-table/data-table-toolbar.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"756ff221-3db9-481b-8780-20c8f504dacc","ts":"2026-06-01T16:14:37.942Z","path":"src/routes/edit/data-table/data-table-toolbar.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"0b8ac1dd-200b-4530-9692-85a41f1a2242","ts":"2026-06-01T16:14:41.326Z","path":"src/routes/edit/data-table/data-table-body/datapoint-input-cell.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"bd5a2301-1e78-4367-b455-ef0dcc8fd4ab","ts":"2026-06-01T16:14:45.895Z","path":"src/routes/edit/data-table/data-table-body/datapoint-input-cell.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"93350945-5a5b-42c8-93e2-5ba4f7867fa7","ts":"2026-06-01T16:14:50.419Z","path":"src/routes/edit/data-table/data-table-body/dataset-input-cell.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
+{"id":"a4c601db-7c68-4ee0-868f-a61a49342e41","ts":"2026-06-01T16:14:53.570Z","path":"src/routes/edit/data-table/data-table-header/header-overflow.tsx","version":"1.0.0","taskID":"00b96bcb-4915-49e0-b666-beff19dbecbd"}
