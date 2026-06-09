@@ -22,10 +22,7 @@ export const createVanillaChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
-	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
-	}
+	let chartTheme = '@carbon/charts/scss';
 
 	const indexHtml
 = `<!DOCTYPE html>
@@ -58,9 +55,7 @@ new ${chartTagMap[chartType]}(chartHolder, {
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'carbon-components': '10.20.0',
-			'@carbon/colors': '10.11.0',
+			'@carbon/charts': '^1.27.11',
 			d3: '5.15.0'
 		}
 	};

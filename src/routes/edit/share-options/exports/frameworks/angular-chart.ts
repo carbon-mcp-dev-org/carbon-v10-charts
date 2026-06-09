@@ -22,10 +22,7 @@ export const createAngularChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
-	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
-	}
+	let chartTheme = '@carbon/charts/scss';
 
 	const appComponentHtml
 = `<${chartTagMap[chartType]} [data]='data' [options]='options'></${chartTagMap[chartType]}>
@@ -109,8 +106,7 @@ platformBrowserDynamic()
 			'@angular/platform-browser': '8.2.14',
 			'@angular/platform-browser-dynamic': '8.2.14',
 			'@angular/router': '8.2.14',
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-angular': '0.40.11',
+			'@carbon/charts-angular': '^1.27.11',
 			'core-js': '3.6.0',
 			d3: '5.15.0',
 			rxjs: '6.5.3',

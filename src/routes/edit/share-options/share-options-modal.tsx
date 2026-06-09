@@ -14,7 +14,7 @@ import { ExportImageModal } from './exports/export-image-modal';
 const exportOptionTileWrapper = css`
 	width: 50%;
 	height: 200px;
-	.bx--tile {
+	.cds--tile {
 		height: 100%;
 		width: 100%;
 		p {
