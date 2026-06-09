@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Modal } from 'carbon-components-react';
-import { Image32, Code32 } from '@carbon/icons-react';
+import { Modal } from '@carbon/react';
+import { Image, Code } from '@carbon/icons-react';
 
 import { css } from 'emotion';
 import {
@@ -86,7 +86,7 @@ export const ShareOptionsModal = ({ chart }: any) => {
 										selectedExportOption: Exports.CODE
 									});
 								}}
-								icon={<Code32 />}
+								icon={<Code size={32} />}
 								selected={shareOptionsState.selectedExportOption === Exports.CODE}
 								label='Code' />
 							<SelectionTile
@@ -97,7 +97,7 @@ export const ShareOptionsModal = ({ chart }: any) => {
 										selectedExportOption: Exports.IMAGE
 									});
 								}}
-								icon={<Image32 />}
+								icon={<Image size={32} />}
 								selected={shareOptionsState.selectedExportOption === Exports.IMAGE}
 								label='Image' />
 						</div>

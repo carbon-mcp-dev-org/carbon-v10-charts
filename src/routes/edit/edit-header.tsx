@@ -3,12 +3,12 @@ import { css } from 'emotion';
 import {
 	Button,
 	InlineLoading
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
-	Copy16,
-	Delete16,
-	Settings16,
-	Share16
+	Copy,
+	Delete,
+	Settings,
+	Share
 } from '@carbon/icons-react';
 import { ModalContext, ModalActionType } from '../../context/modal-context';
 import { ChartModal } from './chart-modal';
@@ -109,8 +109,8 @@ export const EditHeader = ({ chart }: any) => {
 								type: ModalActionType.setDuplicationModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Copy16 fill="black" />
+							className={toolBarAction}
+							renderIcon={Copy}>
 						</Button>
 						<Button
 							kind='ghost'
@@ -120,8 +120,8 @@ export const EditHeader = ({ chart }: any) => {
 								type: ModalActionType.setDeletionModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Delete16 fill="black" />
+							className={toolBarAction}
+							renderIcon={Delete}>
 						</Button>
 						<Button
 							kind='ghost'
@@ -131,8 +131,8 @@ export const EditHeader = ({ chart }: any) => {
 								type: ModalActionType.setShareModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Share16 fill="black" />
+							className={toolBarAction}
+							renderIcon={Share}>
 						</Button>
 						<Button
 							kind='ghost'
@@ -142,8 +142,8 @@ export const EditHeader = ({ chart }: any) => {
 								type: ModalActionType.setSettingsModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Settings16 fill="black" />
+							className={toolBarAction}
+							renderIcon={Settings}>
 						</Button>
 					</div>
 				</div>
