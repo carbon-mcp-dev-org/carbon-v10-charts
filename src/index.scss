@@ -1,4 +1,4 @@
-@import '~carbon-components/scss/globals/scss/styles';
+@use '@carbon/react/scss/index' as *;
 
 .g100 {
 	@import '~@carbon/charts/styles-g100';
