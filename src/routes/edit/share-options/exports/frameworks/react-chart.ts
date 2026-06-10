@@ -21,59 +21,51 @@ export const createReactChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
+	let chartTheme = '@carbon/charts-react/styles.css';
 	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
+		chartTheme = `@carbon/charts-react/styles-${theme}.css`;
 	}
 
 	const indexHtml = `<div id='root'></div>
 `;
-	const indexJs
+const indexJs
 = `import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ${chartTagMap[chartType]} } from '@carbon/charts-react';
 import '${chartTheme}';
-import { css } from 'emotion';
-
-const app = css\`
-	svg.bx--cc--chart-svg {
-		height: 500px;
-		min-width: 100%
-	}
-\`;
 
 const options =
 	${chartOptions};
-class App extends React.Component {
-	state = {
-	data:
-		${chartData}
-	};
-	render() {
+
+function App() {
+	const data =
+		${chartData};
+	
 	return (
-		<div className={app}>
-		<${chartTagMap[chartType]}
-			data={this.state.data}
-			options={options}>
-		</${chartTagMap[chartType]}>
+		<div style={{ height: '500px', width: '100%' }}>
+			<${chartTagMap[chartType]}
+				data={data}
+				options={options}>
+			</${chartTagMap[chartType]}>
 		</div>
 	);
-	}
 }
-ReactDOM.render(<App />, document.getElementById('root'));
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
 `;
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-react': '0.40.11',
-			'carbon-components': '10.20.0',
-			'@carbon/colors': '10.11.0',
-			d3: '5.12.0',
-			react: '16.12.0',
-			'react-dom': '16.12.0',
-			'react-scripts': '3.0.1',
-			emotion: '10.0.27'
+			'@carbon/charts': '^1.27.11',
+			'@carbon/charts-react': '^1.27.11',
+			'@carbon/react': '^1.109.0',
+			'@carbon/colors': '^11.0.0',
+			d3: '7.8.5',
+			react: '18.2.0',
+			'react-dom': '18.2.0',
+			'react-scripts': '5.0.1'
 		}
 	};
 

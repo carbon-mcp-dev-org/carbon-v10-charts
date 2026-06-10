@@ -23,9 +23,9 @@ export const createVueChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
+	let chartTheme = '@carbon/charts-vue/styles.css';
 	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
+		chartTheme = `@carbon/charts-vue/styles-${theme}.css`;
 	}
 
 	const chartVue
@@ -78,11 +78,11 @@ new Vue({
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-vue': '0.40.11',
-			'@vue/cli-plugin-babel': '4.1.1',
-			d3: '5.15.0',
-			vue: '2.6.11'
+			'@carbon/charts': '^1.27.11',
+			'@carbon/charts-vue': '^1.27.11',
+			'@vue/cli-plugin-babel': '^5.0.0',
+			d3: '7.8.5',
+			vue: '^3.3.0'
 		}
 	};
 

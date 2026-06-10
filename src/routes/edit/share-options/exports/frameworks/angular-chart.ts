@@ -22,9 +22,9 @@ export const createAngularChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
+	let chartTheme = '@carbon/charts-angular/styles.css';
 	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
+		chartTheme = `@carbon/charts-angular/styles-${theme}.css`;
 	}
 
 	const appComponentHtml
@@ -101,20 +101,19 @@ platformBrowserDynamic()
 
 	const packageJson = {
 		dependencies: {
-			'@angular/animations': '8.2.14',
-			'@angular/common': '8.2.14',
-			'@angular/compiler': '8.2.14',
-			'@angular/core': '8.2.14',
-			'@angular/forms': '8.2.14',
-			'@angular/platform-browser': '8.2.14',
-			'@angular/platform-browser-dynamic': '8.2.14',
-			'@angular/router': '8.2.14',
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-angular': '0.40.11',
-			'core-js': '3.6.0',
-			d3: '5.15.0',
-			rxjs: '6.5.3',
-			'zone.js': '0.10.2'
+			'@angular/animations': '^17.0.0',
+			'@angular/common': '^17.0.0',
+			'@angular/compiler': '^17.0.0',
+			'@angular/core': '^17.0.0',
+			'@angular/forms': '^17.0.0',
+			'@angular/platform-browser': '^17.0.0',
+			'@angular/platform-browser-dynamic': '^17.0.0',
+			'@angular/router': '^17.0.0',
+			'@carbon/charts': '^1.27.11',
+			'@carbon/charts-angular': '^1.27.11',
+			d3: '7.8.5',
+			rxjs: '~7.8.0',
+			'zone.js': '~0.14.0'
 		}
 	};
 
