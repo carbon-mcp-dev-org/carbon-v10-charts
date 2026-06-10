@@ -5,8 +5,8 @@ import {
 	Modal,
 	Tag,
 	InlineNotification,
-	NotificationActionButton
-} from 'carbon-components-react';
+	ActionableNotification
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { generateNewChart } from './generate-new-chart';
@@ -131,35 +131,16 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 			primaryButtonDisabled={selectedChartType === null}>
 			{
 				props.uploadedData.wasDataModified
-					? <InlineNotification
+					? <ActionableNotification
 						{ ...warningNotificationProps }
-						actions={
-							<>
-								<NotificationActionButton
-									onClick={() => {
-										props.setUploadedData({
-											data: [],
-											wasDataModified: false
-										});
-										props.setRecommendedCharts([]);
-									}}>
-									Use demo data
-								</NotificationActionButton>
-								{
-									props.uploadedData && props.uploadedData.originalData
-									&& <NotificationActionButton
-										onClick={() => {
-											props.setUploadedData({
-												data: props.uploadedData.originalData,
-												wasDataModified: false
-											});
-											props.setRecommendedCharts([]);
-										}}>
-										Use unmodified data
-									</NotificationActionButton>
-								}
-							</>
-						} />
+						actionButtonLabel="Use demo data"
+						onActionButtonClick={() => {
+							props.setUploadedData({
+								data: [],
+								wasDataModified: false
+							});
+							props.setRecommendedCharts([]);
+						}} />
 					: null
 			}
 			<p>Choose a type of chart and click done to start editing your new chart</p>
@@ -173,7 +154,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.SIMPLE_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -184,7 +165,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.SIMPLE_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -195,7 +176,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.SCATTER_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -206,7 +187,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.DONUT_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -217,7 +198,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.STACKED_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -228,7 +209,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.STACKED_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -239,7 +220,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.LINE_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -250,7 +231,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.AREA_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -261,7 +242,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.STACKED_AREA_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -272,7 +253,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.GROUPED_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -283,7 +264,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.GROUPED_BAR_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 				<SelectionTile
 					styles={chartOptionTile}
@@ -294,7 +275,7 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 					tag={
 						isRecommended(ChartType.PIE_CHART)
 							? <Tag type='blue'>Recommended</Tag>
-							: null
+							: undefined
 					} />
 			</div>
 		</Modal>
