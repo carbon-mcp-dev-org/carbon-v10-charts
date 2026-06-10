@@ -1,15 +1,17 @@
-@import '~carbon-components/scss/globals/scss/styles';
+@use '@carbon/react' with (
+	$font-path: '@ibm/plex'
+);
 
 .g100 {
-	@import '~@carbon/charts/styles-g100';
+	@use '@carbon/charts/scss/themes/g100';
 }
 
 .g90 {
-	@import '~@carbon/charts/styles-g90';
+	@use '@carbon/charts/scss/themes/g90';
 }
 
 .g10 {
-	@import '~@carbon/charts/styles-g10';
+	@use '@carbon/charts/scss/themes/g10';
 }
 
 .render-preview {

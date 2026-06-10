@@ -10,7 +10,7 @@ import {
 	AreaChart,
 	StackedAreaChart
 } from '@carbon/charts-react';
-import { SkeletonPlaceholder } from 'carbon-components-react';
+import { SkeletonPlaceholder } from '@carbon/react';
 import '@carbon/charts/styles.css';
 import './chart-preview.scss';
 import { css } from 'emotion';

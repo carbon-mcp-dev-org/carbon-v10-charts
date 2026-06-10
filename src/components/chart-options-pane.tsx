@@ -16,7 +16,7 @@ import {
 	Switch,
 	TextInput,
 	Tooltip
-} from 'carbon-components-react';
+} from '@carbon/react';
 import capitalize from 'lodash/capitalize';
 import get from 'lodash/get';
 import set from 'lodash/set';
