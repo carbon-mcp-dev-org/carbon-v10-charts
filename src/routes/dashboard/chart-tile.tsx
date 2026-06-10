@@ -7,7 +7,7 @@ import {
 	OverflowMenuItem,
 	SkeletonText,
 	Tile
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ModalContext, ModalActionType } from '../../context/modal-context';
 import { useEffect } from 'react';
 import { getChartPreview, RenderProps } from '../../utils/chart-tools';
@@ -141,8 +141,8 @@ export const ChartTile = ({
 						</div>
 						<OverflowMenu
 							className={chartOverflow}
-							ariaLabel='Chart options'
-							iconDescription=''
+							aria-label='Chart options'
+							iconDescription='Chart options'
 							onClick={
 								(event: { stopPropagation: () => void; }) => { event.stopPropagation(); }
 							}>
