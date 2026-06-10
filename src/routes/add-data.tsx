@@ -8,7 +8,7 @@ import {
 	FormLabel,
 	Switch,
 	TextInput
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import {
 	Col, LinkButton, Main, Row

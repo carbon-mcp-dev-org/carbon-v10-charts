@@ -5,7 +5,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Add16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 
 export const Data = () => (
 	<Main>
