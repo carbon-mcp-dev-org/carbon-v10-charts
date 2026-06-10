@@ -58,10 +58,9 @@ new ${chartTagMap[chartType]}(chartHolder, {
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'carbon-components': '10.20.0',
-			'@carbon/colors': '10.11.0',
-			d3: '5.15.0'
+			'@carbon/charts': '^1.27.11',
+			'@carbon/styles': '^1.109.0',
+			d3: '7.8.5'
 		}
 	};
 

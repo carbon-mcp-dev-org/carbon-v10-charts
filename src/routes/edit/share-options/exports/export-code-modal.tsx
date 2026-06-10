@@ -13,7 +13,7 @@ import {
 	Modal,
 	Tab,
 	Tabs
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { ModalContext, ModalActionType } from '../../../../context/modal-context';
 
