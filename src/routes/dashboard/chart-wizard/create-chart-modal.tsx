@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import { ChartWizardModals } from './chart-wizard';
 
-import { Modal } from 'carbon-components-react';
-import { ChartLineData32, DocumentAdd32 } from '@carbon/icons-react';
+import { Modal } from '@carbon/react';
+import { ChartLineData, DocumentAdd } from '@carbon/icons-react';
 import { css } from 'emotion';
 import { SelectionTile } from '../../../components/selection-tile';
 
@@ -73,13 +73,13 @@ export const CreateChartModal = (props: CreateChartModalProps) => {
 				<SelectionTile
 					styles={createChartTile}
 					onChange={() => { setSelectedCreateOption(CreateOptions.UPLOAD_DATA); }}
-					icon={<DocumentAdd32 />}
+					icon={<DocumentAdd size={32} />}
 					selected={selectedCreateOption === CreateOptions.UPLOAD_DATA}
 					label='Upload data'/>
 				<SelectionTile
 					styles={createChartTile}
 					onChange={() => { setSelectedCreateOption(CreateOptions.CHOOSE_TYPE); }}
-					icon={<ChartLineData32 />}
+					icon={<ChartLineData size={32} />}
 					selected={selectedCreateOption === CreateOptions.CHOOSE_TYPE}
 					label='Pick a chart type'/>
 			</div>

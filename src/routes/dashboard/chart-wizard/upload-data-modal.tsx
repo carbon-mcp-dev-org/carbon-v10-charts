@@ -5,7 +5,7 @@ import {
 	Modal,
 	FileUploaderButton,
 	FileUploaderItem
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ChartWizardModals } from './chart-wizard';
 import { ChartType } from '../../../interfaces';
 import { processDataFile } from '../../../utils/file-tools';
