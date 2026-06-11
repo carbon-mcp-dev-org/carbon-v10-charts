@@ -21,10 +21,7 @@ export const createReactChartApp = (chart: any) => {
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 
-	let chartTheme = '@carbon/charts/styles.css';
-	if (theme && theme !== 'default') {
-		chartTheme = `@carbon/charts/styles-${theme}.css`;
-	}
+	const chartTheme = '@carbon/charts/scss';
 
 	const indexHtml = `<div id='root'></div>
 `;
@@ -36,7 +33,7 @@ import '${chartTheme}';
 import { css } from 'emotion';
 
 const app = css\`
-	svg.bx--cc--chart-svg {
+	svg.cds--cc--chart-svg {
 		height: 500px;
 		min-width: 100%
 	}
@@ -65,15 +62,14 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-react': '0.40.11',
-			'carbon-components': '10.20.0',
-			'@carbon/colors': '10.11.0',
+			'@carbon/charts-react': '^1.27.11',
+			'@carbon/react': '1.109.0',
 			d3: '5.12.0',
-			react: '16.12.0',
-			'react-dom': '16.12.0',
-			'react-scripts': '3.0.1',
-			emotion: '10.0.27'
+			react: '16.14.0',
+			'react-dom': '16.14.0',
+			'react-scripts': '5.0.1',
+			emotion: '10.0.27',
+			sass: '^1.33.0'
 		}
 	};
 

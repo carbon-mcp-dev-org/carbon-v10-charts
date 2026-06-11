@@ -13,7 +13,7 @@ import {
 	Checkbox,
 	NumberInput,
 	Loading
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import debounce from 'lodash/debounce';
 import { saveBlob, getFullFileName } from '../../../../utils/file-tools';
@@ -270,14 +270,16 @@ const ExportModalSettings = ({ inputs, handleChange }: any) => {
 					label='Width'
 					value={inputs.width}
 					onClick={numInputOnClick}
-					onChange={numInputOnchange} />
+					onChange={numInputOnchange}
+					size="md" />
 				<NumberInput
 					className={selectInputWH}
 					id='height'
 					label='Height'
 					value={inputs.height}
 					onClick={numInputOnClick}
-					onChange={numInputOnchange} />
+					onChange={numInputOnchange}
+					size="md" />
 			</div>
 			<Checkbox
 				className={selectInput}
