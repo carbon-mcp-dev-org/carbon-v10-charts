@@ -5,7 +5,7 @@ const NotificationContext: React.Context<any> = createContext({});
 NotificationContext.displayName = 'NotificationContext';
 
 export type NotificationData = {
-	kind: string;
+	kind: 'error' | 'info' | 'info-square' | 'success' | 'warning' | 'warning-alt';
 	title: string;
 	message: string;
 	id: number,

@@ -17,7 +17,7 @@ const tileFooter = css`
 	}
 `;
 
-export interface SelectionTile {
+export interface SelectionTileProps {
 	styles?: any,
 	onChange?: any,
 	icon?: JSX.Element | null,
@@ -26,7 +26,7 @@ export interface SelectionTile {
 	tag?: JSX.Element | null
 }
 
-export const SelectionTile = (props: SelectionTile) => (
+export const SelectionTile = (props: SelectionTileProps) => (
 	<div className={props.styles}>
 		<SelectableTile
 			onChange={() => {props.onChange();}}

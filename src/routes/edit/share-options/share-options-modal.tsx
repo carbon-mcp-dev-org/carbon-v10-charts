@@ -69,7 +69,7 @@ export const ShareOptionsModal = ({ chart }: any) => {
 			case ShareOptionsModals.SHARE_OPTIONS:
 				return (
 					<Modal
-						hasForm
+
 						onRequestSubmit={() => handleExportSelection()}
 						open={modalState.ShowModal}
 						onRequestClose={() => dispatchModal({ type: ModalActionType.closeModal })}

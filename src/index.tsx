@@ -14,8 +14,8 @@ render(App);
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-if (module.hot) {
-	module.hot.accept('./app', () => {
+if ((module as any).hot) {
+	(module as any).hot.accept('./app', () => {
 		console.info('App updated');
 		const Next = require('./app').App;
 		render(Next);

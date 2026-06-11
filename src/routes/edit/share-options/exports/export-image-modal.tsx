@@ -19,7 +19,7 @@ import debounce from 'lodash/debounce';
 import { saveBlob, getFullFileName } from '../../../../utils/file-tools';
 import { ShareOptionsModals } from '../share-options-modal';
 import { ModalContext, ModalActionType } from '../../../../context/modal-context';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { ChartsContext } from '../../../../context';
 import { getChartPreview, RenderProps } from '../../../../utils/chart-tools';
 
@@ -182,7 +182,7 @@ export const ExportImageModal = (props: ExportImageProps) => {
 
 	return (
 		<Modal
-			hasForm
+
 			onRequestSubmit={() => {
 				// TODO look into whether it's a better user experience to have the
 				// processing in the background, perhaps with the saving indication

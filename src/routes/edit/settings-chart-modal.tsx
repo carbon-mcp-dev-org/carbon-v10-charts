@@ -14,7 +14,7 @@ export const SettingsChartModal = ({ chart }: any) => {
 	const [, dispatch] = useContext(ChartsContext);
 
 	const props = {
-		size: 'sm',
+		size: 'sm' as const,
 		open: modalState.ShowModal,
 		onRequestClose: () => dispatchModal({ type: ModalActionType.closeModal }),
 		secondaryButtonText: 'Cancel'
@@ -52,7 +52,7 @@ export const SettingsChartModal = ({ chart }: any) => {
 	return (
 		<Modal
 			{...props}
-			hasForm
+
 			modalHeading='Edit chart settings'
 			primaryButtonText='Save'
 			onRequestSubmit={() => updateChartSettings()} >

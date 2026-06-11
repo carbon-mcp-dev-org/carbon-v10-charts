@@ -17,7 +17,7 @@ export const Header = ({ isSideNavExpanded, setIsSideNavExpanded }: any) => {
 	`;
 
 	return (
-		<ShellHeader aria-label="IBM Carbon Charts Builder" role='banner' tabIndex={0}>
+		<ShellHeader aria-label="IBM Carbon Charts Builder">
 			<HeaderMenuButton
 				aria-label={`${isSideNavExpanded ? 'Close menu' : 'Open menu'}`}
 				isActive={isSideNavExpanded}

@@ -465,7 +465,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 					<Tooltip
 						triggerText='Number of variants'
 						direction='top'>
-							Number of distinct colors in the palette.
+							<span>Number of distinct colors in the palette.</span>
 					</Tooltip>
 					<div className={css`
 						display: flex;

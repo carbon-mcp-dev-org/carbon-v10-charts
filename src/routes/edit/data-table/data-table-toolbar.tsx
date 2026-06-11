@@ -114,7 +114,7 @@ export const DataTableToolbar = ({
 				ariaLabel='Download'
 				title='Download'
 				renderIcon={() => <Download size={32} style={{ height: '100%' }} />}>
-				<TableToolbarAction primaryFocus onClick={() => downloadFile(generateCsvFile(), 'text/csv')}>
+				<TableToolbarAction onClick={() => downloadFile(generateCsvFile(), 'text/csv')}>
 					Export as .csv
 				</TableToolbarAction>
 				<TableToolbarAction onClick={() => downloadFile(generateJsonFile(), 'application/json')}>
@@ -123,8 +123,7 @@ export const DataTableToolbar = ({
 			</TableToolbarMenu>
 			<FileUploaderButton
 				size='sm'
-				labelTitle='Upload data'
-				labelDescription=''
+				labelText='Upload data'
 				multiple={false}
 				onChange={(event: any) => { 
 					const input = event.target as HTMLInputElement;

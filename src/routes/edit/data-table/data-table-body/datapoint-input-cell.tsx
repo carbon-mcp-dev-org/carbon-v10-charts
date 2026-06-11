@@ -70,7 +70,6 @@ export const DatapointInputCell = ({
 			isTimeSeries
 			&& <DatePicker
 				className={tableDatePicker}
-				id={`datepicker-${state.rowKeys[rowIndex]}-${state.columnKeys[columnIndex]}`}
 				datePickerType='single'
 				value={datapoint.date}
 				onChange={(event: any) => {
@@ -89,7 +88,6 @@ export const DatapointInputCell = ({
 				<DatePickerInput
 					labelText=''
 					aria-label='Modify datapoint date'
-					iconDescription='Open calendar'
 					id={`datepicker-input-${state.rowKeys[rowIndex]}-${state.columnKeys[columnIndex]}`}/>
 			</DatePicker>
 		}
