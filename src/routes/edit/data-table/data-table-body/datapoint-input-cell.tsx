@@ -5,7 +5,7 @@ import {
 	DatePickerInput,
 	TableCell,
 	TextInput
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { css } from 'emotion';
 import { updateDatapoint } from '../data-table-tools';
 import { DataTableState } from '../data-table';

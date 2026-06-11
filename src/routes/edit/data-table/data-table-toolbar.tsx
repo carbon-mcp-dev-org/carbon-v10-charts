@@ -7,8 +7,8 @@ import {
 	TableToolbarContent,
 	TableToolbarSearch,
 	TableToolbarMenu
-} from 'carbon-components-react';
-import { Download32 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { Download } from '@carbon/icons-react';
 import { css } from 'emotion';
 import {
 	saveBlob,
@@ -113,7 +113,7 @@ export const DataTableToolbar = ({
 				style={{ background: 'white' }}
 				ariaLabel='Download'
 				title='Download'
-				renderIcon={() => <Download32 style={{ height: '100%' }} />}>
+				renderIcon={() => <Download size={32} style={{ height: '100%' }} />}>
 				<TableToolbarAction primaryFocus onClick={() => downloadFile(generateCsvFile(), 'text/csv')}>
 					Export as .csv
 				</TableToolbarAction>
@@ -122,11 +122,15 @@ export const DataTableToolbar = ({
 				</TableToolbarAction>
 			</TableToolbarMenu>
 			<FileUploaderButton
-				size='small'
-				title='Upload data'
-				labelText="Upload data"
+				size='sm'
+				labelTitle='Upload data'
+				labelDescription=''
 				multiple={false}
-				onChange={(event: any) => { handleUpload(event.target.files); }}>
+				onChange={(event: any) => { 
+					const input = event.target as HTMLInputElement;
+					const files = input.files;
+					if (files) handleUpload(files);
+				}}>
 			</FileUploaderButton>
 		</TableToolbar>
 	);
