@@ -7,11 +7,8 @@ import { css } from 'emotion';
 import { DashboardSearch, SortDirection } from './dashboard-search';
 import { ChartGroupDisplayed, DashboardHeader } from './dashboard-header';
 
-import {
-	Col,
-	Main,
-	Row
-} from './../../components';
+import { Grid, Column } from '@carbon/react';
+import { Main } from './../../components';
 import { ChartTileList } from './chart-tile-list';
 import { ChartWizard } from './chart-wizard/chart-wizard';
 import { ChartModal } from '../edit/chart-modal';
@@ -32,7 +29,7 @@ const headerRowSyles = css`
 	margin: 0 -2rem;
 	padding-top: 2rem;
 	margin-top: -2rem;
-	.bx--col {
+	.cds--col {
 		padding: 0;
 	}
 `;
@@ -43,7 +40,7 @@ const searchRowStyles = css`
 	padding-left: 1rem;
 	margin: 0 -2rem;
 	border-bottom: 1px solid #d6d6d6;
-	.bx--col {
+	.cds--col {
 		padding-right: 0;
 	}
 `;
@@ -92,37 +89,25 @@ export const Dashboard = () => {
 	return (
 		<>
 			<Main style={{ marginLeft: '0px' }}>
-				<Row styles={headerRowSyles}>
-					<Col cols={{
-						sm: 12,
-						md: 12,
-						lg: 12
-					}}>
+				<Grid className={headerRowSyles}>
+					<Column sm={4} md={8} lg={16}>
 						<DashboardHeader
 							onDisplayedSwitchHandler={setChartGroupDisplayed}
 							chartGroupDisplayed={chartGroupDisplayed} />
-					</Col>
-				</Row>
-				<Row styles={searchRowStyles}>
-					<Col cols={{
-						sm: 12,
-						md: 12,
-						lg: 12
-					}}>
+					</Column>
+				</Grid>
+				<Grid className={searchRowStyles}>
+					<Column sm={4} md={8} lg={16}>
 						<DashboardSearch
 							onSearchHandler={setChartTitleFilter}
 							onSortHandler={setSortDirection}
 							sortDirection={sortDirection}
 							displayWizard={displayWizard}
 							setDisplayWizard={setDisplayWizard} />
-					</Col>
-				</Row>
-				<Row>
-					<Col cols={{
-						sm: 12,
-						md: 12,
-						lg: 12
-					}}>
+					</Column>
+				</Grid>
+				<Grid>
+					<Column sm={4} md={8} lg={16}>
 						{
 							!loaded
 								? 'Loading...'
@@ -131,8 +116,8 @@ export const Dashboard = () => {
 									loaded={loaded}
 									setModalChart={setModalChart} />
 						}
-					</Col>
-				</Row>
+					</Column>
+				</Grid>
 			</Main>
 			<ChartWizard
 				shouldDisplay={displayWizard}
