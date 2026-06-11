@@ -71,3 +71,7 @@ and that must be fixed, not masked.
 - Per-unit deviations: `DEVIATIONS_FOR_REVIEW.md` (consolidated by `deviation-completeness-audit`)
 - Per-unit self-audits: `.carbon-migration/CARBON_MIGRATION_LEDGER.md`
 - Migration map used: `.carbon-migration/migration-context/maps/carbon-v10-to-v11.md`
+
+## ⚠️ Dependency follow-up required
+
+The deterministic dependency-health check found 2 unresolved blocker(s) after migration, so a bare `npm install` / build may not fully succeed yet. See `DEVIATIONS_FOR_REVIEW.md` for specifics and hand `POST_MIGRATION_REFINEMENT.md` to your AI editor to resolve them.
