@@ -3,8 +3,12 @@ import {
 	Checkbox,
 	Modal,
 	TextInput,
-	TooltipDefinition
+	Toggletip,
+	ToggletipButton,
+	ToggletipContent,
+	ToggletipLabel
 } from '@carbon/react';
+import { Information } from '@carbon/icons-react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import { ChartActionType, ChartsContext } from '../../context/charts-context';
 import './chart-modal.scss';
@@ -67,12 +71,14 @@ export const SettingsChartModal = ({ chart }: any) => {
 					checked={isTemplate}
 					labelText='Make this chart a template'
 					onChange={(_: any, { checked }: any) => setIsTemplate(checked)}/>
-				<TooltipDefinition
-					definition='Setting a chart as a template makes it an easy starting point for future charts.'
-					align='bottom'
-					openOnHover>
-					template
-				</TooltipDefinition>
+				<Toggletip align='bottom'>
+					<ToggletipButton label='Show information'>
+						<Information />
+					</ToggletipButton>
+					<ToggletipContent>
+						<p>Setting a chart as a template makes it an easy starting point for future charts.</p>
+					</ToggletipContent>
+				</Toggletip>
 			</div>
 		</Modal>
 	);
