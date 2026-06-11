@@ -65,10 +65,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 	const packageJson = {
 		dependencies: {
-			'@carbon/charts': '0.40.11',
-			'@carbon/charts-react': '0.40.11',
-			'carbon-components': '10.20.0',
-			'@carbon/colors': '10.11.0',
+			'@carbon/charts': '1.27.11',
+			'@carbon/charts-react': '1.27.11',
 			d3: '5.12.0',
 			react: '16.12.0',
 			'react-dom': '16.12.0',
