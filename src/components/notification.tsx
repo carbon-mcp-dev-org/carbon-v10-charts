@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { InlineNotification, NotificationActionButton } from 'carbon-components-react';
+import { InlineNotification, NotificationActionButton } from '@carbon/react';
 import {
 	NotificationContext,
 	NotificationActionType,
@@ -25,7 +25,6 @@ export const Notification = () => {
 			{state.notifications.map((notification: NotificationData, index: number) => (
 				<InlineNotification
 					lowContrast
-					aria-live="assertive"
 					kind={notification.kind}
 					title={notification.title}
 					subtitle={notification.message}

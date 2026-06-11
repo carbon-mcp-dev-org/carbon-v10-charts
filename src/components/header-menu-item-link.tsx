@@ -2,7 +2,7 @@ import React, {
 	Component, ComponentPropsWithRef, forwardRef
 } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { HeaderMenuItem } from 'carbon-components-react/lib/components/UIShell';
+import { HeaderMenuItem } from '@carbon/react';
 
 interface HeaderMenuItemLinkInterface extends RouteComponentProps, ComponentPropsWithRef<any> { }
 
