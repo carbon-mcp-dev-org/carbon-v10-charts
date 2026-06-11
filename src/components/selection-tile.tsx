@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { SelectableTile } from 'carbon-components-react';
+import { SelectableTile } from '@carbon/react';
 
 const tileFooter = css`
 	position: absolute;
@@ -29,7 +29,6 @@ export interface SelectionTile {
 export const SelectionTile = (props: SelectionTile) => (
 	<div className={props.styles}>
 		<SelectableTile
-			light={true}
 			onChange={() => {props.onChange();}}
 			selected={props.selected}>
 			{ props.icon }

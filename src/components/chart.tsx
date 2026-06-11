@@ -10,8 +10,8 @@ import {
 	AreaChart,
 	StackedAreaChart
 } from '@carbon/charts-react';
-import { SkeletonPlaceholder } from 'carbon-components-react';
-import '@carbon/charts/styles.css';
+import { SkeletonPlaceholder } from '@carbon/react';
+import '@carbon/charts/scss';
 import './chart-preview.scss';
 import { css } from 'emotion';
 
@@ -115,7 +115,7 @@ export const Chart = ({ chart }: any) => {
 			</div>
 			: <div className={chartWrapperStyle}>
 				<div className={chartTheme}>
-					<div className='chart-holder bx--chart-holder' style={{ height: '533px' }}>
+					<div className='chart-holder cds--chart-holder' style={{ height: '533px' }}>
 					Blink!
 					</div>
 				</div>
