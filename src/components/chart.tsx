@@ -11,7 +11,6 @@ import {
 	StackedAreaChart
 } from '@carbon/charts-react';
 import { SkeletonPlaceholder } from '@carbon/react';
-import '@carbon/charts-react/dist/styles.css';
 import './chart-preview.scss';
 import { css } from 'emotion';
 

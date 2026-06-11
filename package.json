@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://ibm.github.io/carbon-charts-builder/",
   "dependencies": {
-    "@carbon/react": "1.109.0",
+    "@carbon/react": "1.74.0",
     "@carbon/icons-react": "^11.50.0",
     "@carbon/charts-react": "1.23.17",
     "@types/lodash-es": "^4.17.3",

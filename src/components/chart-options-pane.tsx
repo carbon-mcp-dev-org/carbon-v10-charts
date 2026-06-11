@@ -465,7 +465,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 					<Tooltip
 						triggerText='Number of variants'
 						direction='top'>
-							Number of distinct colors in the palette.
+						<span>Number of distinct colors in the palette.</span>
 					</Tooltip>
 					<div className={css`
 						display: flex;
@@ -519,6 +519,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 				legendText=''>
 					<ContentSwitcher
 						className={inputWrap}
+						size='md'
 						onChange={
 							(event: any) => setState({ XAxisContentSwitch: event.name })
 						}
@@ -540,6 +541,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 				legendText=''>
 					<ContentSwitcher
 						className={inputWrap}
+						size='md'
 						onChange={
 							(event: any) => setState({ YAxisContentSwitch: event.name })
 						}

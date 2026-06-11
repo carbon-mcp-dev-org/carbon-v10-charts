@@ -43,7 +43,6 @@ export const CreateChartModal = (props: CreateChartModalProps) => {
 	return (
 		<Modal
 			open={props.shouldDisplay}
-			hasForm
 			shouldSubmitOnEnter={false}
 			selectorPrimaryFocus='.cds--tile--selectable'
 			onSecondarySubmit={() => {

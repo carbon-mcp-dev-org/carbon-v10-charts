@@ -124,7 +124,6 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 				props.setDisplayedModal(props.lastVisitedModal);
 				props.setLastVisitedModal(ChartWizardModals.CHOOSE_CHART_MODAL);
 			}}
-			hasForm
 			modalHeading='Create new chart'
 			primaryButtonText='Done'
 			secondaryButtonText='Back'
@@ -132,34 +131,31 @@ export const ChooseChartModal = (props: ChooseChartModalProps) => {
 			{
 				props.uploadedData.wasDataModified
 					? <InlineNotification
-						{ ...warningNotificationProps }
-						actions={
-							<>
-								<NotificationActionButton
-									onClick={() => {
-										props.setUploadedData({
-											data: [],
-											wasDataModified: false
-										});
-										props.setRecommendedCharts([]);
-									}}>
-									Use demo data
-								</NotificationActionButton>
-								{
-									props.uploadedData && props.uploadedData.originalData
-									&& <NotificationActionButton
-										onClick={() => {
-											props.setUploadedData({
-												data: props.uploadedData.originalData,
-												wasDataModified: false
-											});
-											props.setRecommendedCharts([]);
-										}}>
-										Use unmodified data
-									</NotificationActionButton>
-								}
-							</>
-						} />
+						{ ...warningNotificationProps }>
+						<NotificationActionButton
+							onClick={() => {
+								props.setUploadedData({
+									data: [],
+									wasDataModified: false
+								});
+								props.setRecommendedCharts([]);
+							}}>
+							Use demo data
+						</NotificationActionButton>
+						{
+							props.uploadedData && props.uploadedData.originalData
+							&& <NotificationActionButton
+								onClick={() => {
+									props.setUploadedData({
+										data: props.uploadedData.originalData,
+										wasDataModified: false
+									});
+									props.setRecommendedCharts([]);
+								}}>
+								Use unmodified data
+							</NotificationActionButton>
+						}
+					</InlineNotification>
 					: null
 			}
 			<p>Choose a type of chart and click done to start editing your new chart</p>

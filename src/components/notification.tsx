@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
-import { InlineNotification, NotificationActionButton } from '@carbon/react';
+import {
+	InlineNotification,
+	NotificationActionButton,
+	type InlineNotificationProps
+} from '@carbon/react';
 import {
 	NotificationContext,
 	NotificationActionType,
@@ -8,6 +12,22 @@ import {
 import { css } from 'emotion';
 
 const notificationStyle = { minWidth: '30rem' };
+
+const getNotificationKind = (
+	kind: NotificationData['kind']
+): InlineNotificationProps['kind'] => {
+	switch (kind) {
+		case 'error':
+		case 'info':
+		case 'info-square':
+		case 'success':
+		case 'warning':
+		case 'warning-alt':
+			return kind;
+		default:
+			return 'info';
+	}
+};
 
 const notificationAreaStyle = css`
 	left: 50%;
@@ -25,10 +45,9 @@ export const Notification = () => {
 			{state.notifications.map((notification: NotificationData, index: number) => (
 				<InlineNotification
 					lowContrast
-					kind={notification.kind}
+					kind={getNotificationKind(notification.kind)}
 					title={notification.title}
 					subtitle={notification.message}
-					caption={null}
 					key={notification.id}
 					onCloseButtonClick={() => {
 						if (notification.action) {
@@ -39,8 +58,8 @@ export const Notification = () => {
 							data: notification
 						});
 					}}
-					style={notificationStyle}
-					actions={notification.action
+					style={notificationStyle}>
+					{notification.action
 						? <NotificationActionButton
 							onClick={() => {
 								notification.action.actionFunction();
@@ -52,7 +71,7 @@ export const Notification = () => {
 							{notification.action.actionText}
 						</NotificationActionButton>
 						: undefined}
-				/>
+				</InlineNotification>
 			))}
 		</div>
 	);

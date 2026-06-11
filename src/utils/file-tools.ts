@@ -1,6 +1,18 @@
-import { extension } from 'mime-types';
 import Papa from 'papaparse';
 import { getGroupNames } from './chart-tools';
+
+const MIME_TYPE_EXTENSIONS: Record<string, string> = {
+	'application/json': 'json',
+	'text/csv': 'csv',
+	'image/png': 'png',
+	'image/jpeg': 'jpeg',
+	'image/jpg': 'jpg',
+	'image/gif': 'gif',
+	'image/svg+xml': 'svg',
+	'image/webp': 'webp'
+};
+
+const getExtension = (mimeType: string) => MIME_TYPE_EXTENSIONS[mimeType] || 'txt';
 
 const restoreUploadedJsonData = (chartData: any) => {
 	let restoredUploadedData = chartData;
@@ -71,7 +83,7 @@ const restoreUploadedJsonData = (chartData: any) => {
 
 
 export const getFullFileName = (name: string, mimeType: string) => (
-	`${name}.${extension(mimeType)}`
+	`${name}.${getExtension(mimeType)}`
 );
 
 export const saveFile = (url: string, fileName: string) => {
@@ -221,18 +233,14 @@ export const processDataFile = (file: any) => new Promise<any>((resolve, reject)
 
 export const warningNotificationProps = {
 	lowContrast: true,
-	role: 'alert',
-	notificationType: 'inline',
-	kind: 'warning',
+	kind: 'warning' as const,
 	title: 'Uploaded data has been modified',
 	subtitle: 'data did not match expected format so we modified it so you can still use it'
 };
 
 export const errorNotificationProps = {
 	lowContrast: true,
-	role: 'alert',
-	notificationType: 'inline',
-	kind: 'error',
+	kind: 'error' as const,
 	title: 'Error',
 	subtitle: ''
 };

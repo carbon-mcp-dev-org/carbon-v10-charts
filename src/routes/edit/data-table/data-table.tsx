@@ -137,21 +137,21 @@ export const DataTable = ({ chart }: any) => {
 						onCloseButtonClick={() => setNotificationState({
 							...notificationState,
 							visible: false
-						})}
-						actions={
-							notificationState.notificationProps.kind === 'warning'
-								&& <NotificationActionButton
-									onClick={() => {
-										updateData(notificationState.backupData);
-										setNotificationState({
-											...notificationState,
-											visible: false,
-											backupData: []
-										});
-									}}>
-									Revert change
-								</NotificationActionButton>
-						} />
+						})}>
+						{notificationState.notificationProps.kind === 'warning'
+							? <NotificationActionButton
+								onClick={() => {
+									updateData(notificationState.backupData);
+									setNotificationState({
+										...notificationState,
+										visible: false,
+										backupData: []
+									});
+								}}>
+								Revert change
+							</NotificationActionButton>
+							: undefined}
+					</InlineNotification>
 					: null
 			}
 			<TableContainer

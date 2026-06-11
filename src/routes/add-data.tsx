@@ -69,7 +69,10 @@ export const AddData = () => {
 			</Row>
 			<Row>
 				<Col cols={{ sm: 2 }}>
-					<ContentSwitcher onChange={(event: any) => setType(event.name)}>
+					<ContentSwitcher
+						size="md"
+						selectedIndex={0}
+						onChange={(event: any) => setType(event.name)}>
 						<Switch name="upload" text="Upload"/>
 						<Switch name="api" text="Endpoint"/>
 					</ContentSwitcher>

@@ -182,7 +182,6 @@ export const ExportImageModal = (props: ExportImageProps) => {
 
 	return (
 		<Modal
-			hasForm
 			onRequestSubmit={() => {
 				// TODO look into whether it's a better user experience to have the
 				// processing in the background, perhaps with the saving indication

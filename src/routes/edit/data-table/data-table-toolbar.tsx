@@ -111,10 +111,10 @@ export const DataTableToolbar = ({
 			</TableToolbarContent>
 			<TableToolbarMenu
 				style={{ background: 'white' }}
-				ariaLabel='Download'
+				aria-label='Download'
 				title='Download'
 				renderIcon={() => <Download size={32} style={{ height: '100%' }} />}>
-				<TableToolbarAction primaryFocus onClick={() => downloadFile(generateCsvFile(), 'text/csv')}>
+				<TableToolbarAction onClick={() => downloadFile(generateCsvFile(), 'text/csv')}>
 					Export as .csv
 				</TableToolbarAction>
 				<TableToolbarAction onClick={() => downloadFile(generateJsonFile(), 'application/json')}>

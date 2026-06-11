@@ -1,5 +1,5 @@
 @use '@carbon/react' with (
-  $font-path: '@ibm/plex'
+  $font-path: '~@ibm/plex'
 );
 @use '@carbon/charts/scss' as charts;
 

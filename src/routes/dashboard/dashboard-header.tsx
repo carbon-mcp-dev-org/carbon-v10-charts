@@ -33,6 +33,7 @@ export const DashboardHeader = ({ onDisplayedSwitchHandler, chartGroupDisplayed 
 		<h2 className={chartTitle}>Charts</h2>
 		<ContentSwitcher
 			className={contentSwitcher}
+			size='md'
 			onChange={(event: any) => onDisplayedSwitchHandler(event.name)}
 			selectedIndex={chartGroupDisplayed}>
 			<Switch name={ChartGroupDisplayed.AllCharts} text='All charts' />

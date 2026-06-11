@@ -5,8 +5,7 @@ import {
 	TextInput,
 	Toggletip,
 	ToggletipButton,
-	ToggletipContent,
-	ToggletipLabel
+	ToggletipContent
 } from '@carbon/react';
 import { Information } from '@carbon/icons-react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
@@ -18,7 +17,7 @@ export const SettingsChartModal = ({ chart }: any) => {
 	const [, dispatch] = useContext(ChartsContext);
 
 	const props = {
-		size: 'sm',
+		size: 'sm' as const,
 		open: modalState.ShowModal,
 		onRequestClose: () => dispatchModal({ type: ModalActionType.closeModal }),
 		secondaryButtonText: 'Cancel'
@@ -56,7 +55,6 @@ export const SettingsChartModal = ({ chart }: any) => {
 	return (
 		<Modal
 			{...props}
-			hasForm
 			modalHeading='Edit chart settings'
 			primaryButtonText='Save'
 			onRequestSubmit={() => updateChartSettings()} >
@@ -76,7 +74,7 @@ export const SettingsChartModal = ({ chart }: any) => {
 						<Information />
 					</ToggletipButton>
 					<ToggletipContent>
-						<p>Setting a chart as a template makes it an easy starting point for future charts.</p>
+						<div>Setting a chart as a template makes it an easy starting point for future charts.</div>
 					</ToggletipContent>
 				</Toggletip>
 			</div>

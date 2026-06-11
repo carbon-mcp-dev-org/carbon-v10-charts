@@ -15,10 +15,7 @@ export const createAngularChartApp = (chart: any) => {
 	const chartData = JSON.stringify(chart.data, null, '\t');
 	const chartType = `${chart.type}`;
 	let chartOptions = '';
-	let theme;
 	if (chart && chart.options && chart.options.rawChartOptions) {
-		// eslint-disable-next-line prefer-destructuring
-		theme = chart.options.rawChartOptions.theme;
 		chartOptions = JSON.stringify(chart.options.rawChartOptions, null, '\t');
 	}
 

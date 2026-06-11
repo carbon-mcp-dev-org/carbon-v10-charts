@@ -65,7 +65,6 @@ export const ExportCode = ({
 
 	return (
 		<Modal
-			hasForm
 			open={modalState.ShowModal && displayedModal === ShareOptionsModals.CODE_EXPORTS}
 			onRequestClose={() => dispatchModal({ type: ModalActionType.closeModal })}
 			primaryButtonText='Done'
