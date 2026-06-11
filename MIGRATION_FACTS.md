@@ -29,7 +29,7 @@ This migration bumped React from 16.13.1 to ^16.14.0, which is compatible.
 
 | Package | Version pinned | Source |
 |---|---|---|
-| `@carbon/react` | 1.109.0 | added |
+| `@carbon/react` | 1.74.0 | added |
 | `@carbon/icons-react` | ^11.50.0 | per §1.1.2 — the package is REQUIRED under BOTH options whenever any source file imports icons |
 | `@carbon/styles` | not added | per §1.1.1 |
 | `@carbon/charts-react` | 1.23.17 | per §1.1 (Charts in project) |
@@ -70,3 +70,7 @@ so a **bare** install resolves cleanly — no `--legacy-peer-deps`, no `--force`
 If a bare install still fails, that is a blocking `[toolchain-install-failed]`
 deviation in `DEVIATIONS_FOR_REVIEW.md`: the project does not install cleanly
 and that must be fixed, not masked.
+
+## ⚠️ Dependency follow-up required
+
+The deterministic dependency-health check found 1 unresolved blocker(s) after migration, so a bare `npm install` / build may not fully succeed yet. See `DEVIATIONS_FOR_REVIEW.md` for specifics and hand `POST_MIGRATION_REFINEMENT.md` to your AI editor to resolve them.
