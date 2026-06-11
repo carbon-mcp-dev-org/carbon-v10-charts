@@ -23,14 +23,14 @@ claim that "Carbon v11 requires React 17+", that claim is **incorrect** for
 "match" a recorded version — that re-breaks `react/jsx-runtime`. Verify the
 peer-dep range yourself with `npm view @carbon/react peerDependencies`.
 
-This migration kept React at 16.14.0 (bumped from 16.13.1), which is compatible.
+React is at `^16.14.0` in the final package.json (verified deterministically post-migration), which is compatible.
 
 ## Carbon package versions (post-migration)
 
 | Package | Version pinned | Source |
 |---|---|---|
 | `@carbon/react` | `1.109.0` | added |
-| `@carbon/icons-react` | `11.50.0` | per §1.1.2 — the package is REQUIRED under BOTH options whenever any source file imports icons |
+| `@carbon/icons-react` | ^11.50.0 | per §1.1.2 — the package is REQUIRED under BOTH options whenever any source file imports icons |
 | `@carbon/styles` | not added | per §1.1.1 — React app consuming @carbon/react |
 | `@carbon/charts-react` | `1.27.11` | per §1.1 (Charts in project) |
 
