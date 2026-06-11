@@ -3,12 +3,12 @@ import { css } from 'emotion';
 import {
 	Button,
 	InlineLoading
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
-	Copy16,
-	Delete16,
-	Settings16,
-	Share16
+	Copy,
+	Delete,
+	Settings,
+	Share
 } from '@carbon/icons-react';
 import { ModalContext, ModalActionType } from '../../context/modal-context';
 import { ChartModal } from './chart-modal';
@@ -30,7 +30,7 @@ const editHeader = css`
 		}
 		.title-subheading {
 			display: inline-flex;
-			.bx--inline-loading {
+			[aria-live='assertive'] {
 				width: auto;
 				position: relative;
 				margin-left: 10px;
@@ -95,7 +95,8 @@ export const EditHeader = ({ chart }: any) => {
 							&& <InlineLoading
 								description='Chart is updating...'
 								iconDescription='Active loading indicator'
-								status='active' />
+								status='active'
+								aria-live='assertive' />
 						}
 					</div>
 				</div>
@@ -103,48 +104,56 @@ export const EditHeader = ({ chart }: any) => {
 					<div className='toolBarButtons'>
 						<Button
 							kind='ghost'
+							hasIconOnly
+							iconDescription='Duplicate chart'
 							aria-label='Duplicate chart'
 							title='Duplicate chart'
+							renderIcon={Copy}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setDuplicationModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Copy16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
+							hasIconOnly
+							iconDescription='Delete chart'
 							aria-label='Delete chart'
 							title='Delete chart'
+							renderIcon={Delete}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setDeletionModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Delete16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
+							hasIconOnly
+							iconDescription='Share chart'
 							aria-label='Share chart'
 							title='Share chart'
+							renderIcon={Share}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setShareModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Share16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 						<Button
 							kind='ghost'
+							hasIconOnly
+							iconDescription='Chart settings'
 							aria-label='Chart settings'
 							title='Chart settings'
+							renderIcon={Settings}
 							onClick={() => dispatchModal({
 								type: ModalActionType.setSettingsModal,
 								id: chart.id
 							})}
-							className={toolBarAction}>
-							<Settings16 fill="black" />
-						</Button>
+							className={toolBarAction}
+						/>
 					</div>
 				</div>
 			</div>

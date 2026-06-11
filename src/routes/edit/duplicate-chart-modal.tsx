@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { NotificationActionType, NotificationContext } from '../../context/notification-context';
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import {
 	ChartActionType,
@@ -97,10 +97,10 @@ export const DuplicateChartModal = ({ id }: any) => {
 			primaryButtonText='Duplicate'
 			primaryButtonDisabled={!!chartsState.currentlyProcessing}
 			onRequestSubmit={() => duplicateChart()}>
-			<p>
+			<div>
 				Click <strong>Duplicate</strong> to begin to edit a copy of the current chart
 				or <strong>Cancel</strong> to continue on this chart.
-			</p>
+			</div>
 		</Modal>
 	);
 };

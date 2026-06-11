@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 import { ModalActionType, ModalContext } from '../../context/modal-context';
 import {
 	ChartActionType,
@@ -71,10 +71,10 @@ export const DeleteChartModal = ({ id }: any) => {
 			danger
 			primaryButtonText='Delete'
 			onRequestSubmit={() => deleteChart()}>
-			<p>
+			<div>
 				Click <strong>Cancel</strong> to go back to editing your chart
 				or <strong>Delete</strong> to remove it permanently.
-			</p>
+			</div>
 		</Modal>
 	);
 };
