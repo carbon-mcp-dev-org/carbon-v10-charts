@@ -29,7 +29,7 @@ export interface SelectionTileProps {
 export const SelectionTile = (props: SelectionTileProps) => (
 	<div className={props.styles}>
 		<SelectableTile
-			light={true}
+			value={props.label || 'tile'}
 			onChange={() => {props.onChange();}}
 			selected={props.selected}>
 			{ props.icon }

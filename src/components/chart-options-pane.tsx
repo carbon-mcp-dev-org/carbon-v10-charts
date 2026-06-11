@@ -16,7 +16,7 @@ import {
 	Switch,
 	TextInput,
 	Tooltip
-} from 'carbon-components-react';
+} from '@carbon/react';
 import capitalize from 'lodash/capitalize';
 import get from 'lodash/get';
 import set from 'lodash/set';
@@ -32,7 +32,7 @@ const accordionCss = css`
     max-width: 256px;
     display: inline-block;
 
-	.bx--accordion__item--active .bx--accordion__content {
+	.cds--accordion__item--active .cds--accordion__content {
 		padding: 0;
 	}
 `;
@@ -463,9 +463,11 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 				}}
 				legendText=''>
 					<Tooltip
-						triggerText='Number of variants'
-						direction='top'>
-							Number of distinct colors in the palette.
+						align='top'
+						label='Number of distinct colors in the palette.'>
+						<button type="button" className="cds--tooltip__trigger">
+							Number of variants
+						</button>
 					</Tooltip>
 					<div className={css`
 						display: flex;
@@ -519,6 +521,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 				legendText=''>
 					<ContentSwitcher
 						className={inputWrap}
+						size="md"
 						onChange={
 							(event: any) => setState({ XAxisContentSwitch: event.name })
 						}
@@ -540,6 +543,7 @@ export const ChartOptionsPane = ({ chart, setChart }: any) => {
 				legendText=''>
 					<ContentSwitcher
 						className={inputWrap}
+						size="md"
 						onChange={
 							(event: any) => setState({ YAxisContentSwitch: event.name })
 						}
