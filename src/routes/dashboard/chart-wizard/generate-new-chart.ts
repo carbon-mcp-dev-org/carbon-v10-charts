@@ -13,12 +13,10 @@ import merge from 'lodash/merge';
 const defaultOptions = {
 	axes: {
 		left: {
-			primary: true,
 			mapsTo: 'value'
 		},
 		bottom: {
 			scaleType: 'labels',
-			secondary: true,
 			mapsTo: 'key'
 		}
 	}
